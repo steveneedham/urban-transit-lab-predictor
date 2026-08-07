@@ -1,0 +1,722 @@
+<!doctype html>
+<html data-theme="sunny">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Event-Readiness Analytics — Case Study</title>
+  <link rel="stylesheet" href="https://steveneedham.github.io/design-system/styles.css">
+  <link rel="stylesheet" href="https://steveneedham.github.io/design-system/sunny.css">
+  <style>
+    .case-hero {
+      padding: 4rem var(--space-page-x) 3rem;
+      border-bottom: 2px solid var(--amber);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .case-eyebrow {
+      color: var(--amber);
+      font-family: var(--font-mono);
+      font-size: var(--text-eyebrow);
+      letter-spacing: var(--tracking-eyebrow);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .case-eyebrow::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--amber);
+      box-shadow: 0 0 12px var(--amber);
+    }
+
+    .case-hero h1 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 2.8rem;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      max-width: 800px;
+      margin: 0 0 1.5rem;
+      color: var(--text);
+    }
+
+    .case-hero .lede {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 680px;
+      font-weight: 400;
+      margin: 0;
+    }
+
+    .case-meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+
+    .case-meta-item {
+      font-family: var(--font-mono);
+      font-size: var(--text-mono-xs);
+      color: var(--muted-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .case-meta-item strong {
+      display: block;
+      color: var(--text);
+      font-size: var(--text-body-sm);
+      font-family: var(--font-body);
+      font-weight: 600;
+      margin-top: 0.5rem;
+    }
+
+    .case-track {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1rem 0;
+      font-family: var(--font-mono);
+      font-size: var(--text-mono-sm);
+      color: var(--muted-dim);
+      max-width: 1000px;
+      margin: 0 auto;
+      padding-left: var(--space-page-x);
+      padding-right: var(--space-page-x);
+    }
+
+    .track-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+      flex-shrink: 0;
+    }
+
+    .case-section {
+      padding: 3.5rem var(--space-page-x);
+      border-bottom: 2px solid var(--amber);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .sec-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-eyebrow);
+      letter-spacing: var(--tracking-label);
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .case-section h2 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin: 0 0 1.2rem;
+      color: var(--text);
+    }
+
+    .case-section p {
+      color: var(--muted);
+      font-size: var(--text-body);
+      max-width: 680px;
+      margin: 0 0 1rem;
+      line-height: var(--leading-body);
+    }
+
+    .case-section p strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* Context Grid */
+    .ctx-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .ctx-card {
+      background: var(--panel);
+      border: 2px solid var(--amber);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(244, 165, 56, 0.1);
+    }
+
+    .ctx-card .k {
+      font-family: var(--font-mono);
+      font-size: var(--text-mono-xs);
+      color: var(--amber);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .ctx-card .v {
+      font-size: var(--text-body-sm);
+      color: var(--muted);
+      line-height: var(--leading-body);
+    }
+
+    /* Query Log */
+    .log {
+      background: var(--panel);
+      border: 2px solid var(--amber);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(244, 165, 56, 0.1);
+      margin-top: 1.5rem;
+    }
+
+    .log-head {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 1rem 1.2rem;
+      border-bottom: 2px solid var(--amber);
+      background: rgba(244, 165, 56, 0.05);
+    }
+
+    .log-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .log-head span {
+      font-family: var(--font-mono);
+      font-size: var(--text-mono-sm);
+      color: var(--muted);
+      margin-left: 0.5rem;
+      font-weight: 600;
+    }
+
+    .log-body {
+      padding: 0;
+    }
+
+    .log-row {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 1.2rem;
+      padding: 1.2rem 1.5rem;
+      border-bottom: 1px solid var(--panel-line);
+    }
+
+    .log-row:last-child {
+      border-bottom: none;
+    }
+
+    .log-row:hover {
+      background: rgba(244, 165, 56, 0.02);
+    }
+
+    .log-idx {
+      font-family: var(--font-mono);
+      font-size: var(--text-mono-sm);
+      color: var(--amber);
+      font-weight: 600;
+      padding-top: 0.1rem;
+    }
+
+    .log-content .q {
+      font-family: var(--font-mono);
+      font-size: var(--text-body-sm);
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
+    }
+
+    .log-content .q::before {
+      content: '❯ ';
+      color: var(--amber);
+      font-weight: 600;
+    }
+
+    .log-content .a {
+      font-size: var(--text-body-sm);
+      color: var(--muted);
+      padding-left: 1rem;
+      border-left: 2px solid var(--amber);
+    }
+
+    .tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: var(--text-mono-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.2rem 0.6rem;
+      border-radius: 99px;
+      margin-left: 0.5rem;
+      font-weight: 600;
+    }
+
+    .tag-fix {
+      background: rgba(224, 82, 82, 0.15);
+      color: #d84444;
+    }
+
+    .tag-build {
+      background: rgba(79, 187, 160, 0.15);
+      color: var(--teal);
+    }
+
+    .tag-insight {
+      background: rgba(244, 165, 56, 0.15);
+      color: var(--amber);
+    }
+
+    /* Lessons */
+    .lesson-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+
+    .lesson {
+      background: var(--panel);
+      border: 2px solid var(--amber);
+      border-radius: var(--radius-md);
+      padding: 1.8rem;
+      box-shadow: 0 4px 12px rgba(244, 165, 56, 0.1);
+    }
+
+    .lesson-num {
+      font-family: var(--font-mono);
+      font-size: var(--text-mono-xs);
+      color: var(--amber);
+      margin-bottom: 0.8rem;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+
+    .lesson h3 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: var(--text-h3);
+      margin: 0 0 0.8rem;
+      color: var(--text);
+    }
+
+    .lesson p {
+      font-size: var(--text-body-sm);
+      margin: 0;
+      max-width: 100%;
+    }
+
+    .lesson .example {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: rgba(244, 165, 56, 0.05);
+      border-radius: var(--radius-sm);
+      border-left: 2px solid var(--teal);
+    }
+
+    .lesson .example .lbl {
+      font-family: var(--font-mono);
+      font-size: var(--text-mono-xs);
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+    }
+
+    .lesson .example p {
+      font-size: var(--text-body-sm);
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* Outcome */
+    .outcome-list {
+      list-style: none;
+      margin: 1.5rem 0 0;
+      padding: 0;
+    }
+
+    .outcome-list li {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--panel-line);
+    }
+
+    .outcome-list li:last-child {
+      border-bottom: none;
+    }
+
+    .outcome-list .check {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(79, 187, 160, 0.15);
+      color: var(--teal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-body-sm);
+      flex-shrink: 0;
+      font-weight: 600;
+    }
+
+    .outcome-list .txt {
+      font-size: var(--text-body-sm);
+      color: var(--muted);
+      padding-top: 0.2rem;
+    }
+
+    .outcome-list .txt strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* Method Tags */
+    .method-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1.5rem;
+    }
+
+    .method-tag {
+      font-family: var(--font-mono);
+      font-size: var(--text-mono-xs);
+      padding: 0.5rem 0.9rem;
+      background: var(--panel);
+      border: 1px solid var(--amber);
+      border-radius: 99px;
+      color: var(--amber);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+    }
+
+    .note {
+      background: var(--panel);
+      border: 2px solid var(--amber);
+      border-left: 4px solid var(--amber);
+      border-radius: var(--radius-sm);
+      padding: 1.2rem;
+      margin-top: 1.5rem;
+      box-shadow: 0 4px 12px rgba(244, 165, 56, 0.1);
+    }
+
+    .note .lbl {
+      font-family: var(--font-mono);
+      font-size: var(--text-mono-xs);
+      color: var(--amber);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.6rem;
+      font-weight: 600;
+    }
+
+    .note p {
+      font-size: var(--text-body-sm);
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .case-footer {
+      padding: 3rem var(--space-page-x) 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: var(--text-mono-xs);
+    }
+
+    @media (max-width: 900px) {
+      .case-meta {
+        grid-template-columns: 1fr;
+      }
+
+      .ctx-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .case-hero h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <div class="nav-name">Urban Transit Lab</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="forecast.html">Forecast</a>
+      <a href="research-library.html">Research</a>
+      <a href="case-study.html">Case Study</a>
+      <a href="https://github.com/steveneedham/urban-transit-lab-predictor" target="_blank">GitHub</a>
+    </div>
+  </div>
+
+  <div class="case-hero">
+    <div class="case-eyebrow">Case Study · Operations Analytics</div>
+    <h1>Turning a week of scattered data requests into a repeatable event-readiness playbook</h1>
+    <p class="lede">How iterative, natural-language querying against live fleet, ride, and workforce data — corrected in real time — became the operational plan for a major public event weekend.</p>
+    <div class="case-meta">
+      <div class="case-meta-item">Context<strong>Mid-size US city · Shared micromobility</strong></div>
+      <div class="case-meta-item">Data Sources<strong>Fleet telemetry · Ride logs · Timesheets · Action logs</strong></div>
+      <div class="case-meta-item">Timeframe<strong>~10 days, two consecutive event weekends</strong></div>
+    </div>
+  </div>
+
+  <div class="case-track">
+    <span class="track-dot"></span>
+    <span>Systems & Tools</span>
+    <span>/</span>
+    <span>Data & Analytics Pipeline</span>
+  </div>
+
+  <section class="case-section" id="context">
+    <div class="sec-label">01 — Context</div>
+    <h2>Two festivals, same city block, one week apart</h2>
+    <p>A mid-size US city hosts back-to-back public festivals in the same downtown park corridor — one over a weekend, the next running one day longer. The operator managing part of the shared micromobility fleet needed to know: <strong>what actually happened last weekend, and what has to change before the next one.</strong></p>
+
+    <div class="ctx-grid">
+      <div class="ctx-card">
+        <div class="k">Fleet</div>
+        <div class="v">A mixed fleet of e-scooters and two e-bike models, positioned across zones with very different demand patterns — a nightlife corridor, a downtown waterfront, and a university district.</div>
+      </div>
+      <div class="ctx-card">
+        <div class="k">Workforce</div>
+        <div class="v">A blended crew of contracted operators and in-house staff, plus a specialized rebalance-only role. Some logged activity looked like field work but was actually warehouse battery diagnostics.</div>
+      </div>
+      <div class="ctx-card">
+        <div class="k">Competitive Landscape</div>
+        <div class="v">A second operator running a comparable fleet in the same city, tracked via public availability feeds — used as a benchmark for uptime and zone density, not named directly.</div>
+      </div>
+      <div class="ctx-card">
+        <div class="k">The Ask</div>
+        <div class="v">Not a single report — a running, corrected analysis across a week of new data drops: fleet snapshots, ride exports, action logs, and payroll data, each refining the picture.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-section" id="log">
+    <div class="sec-label">02 — The Query Log</div>
+    <h2>What was actually asked, in order</h2>
+    <p>The real value wasn't any single chart — it was the sequence. Each question either <span style="color: var(--teal);">built</span> on the last, <span style="color: #d84444;">corrected</span> a wrong assumption, or surfaced an <span style="color: var(--amber);">insight</span> that changed the plan. A condensed, anonymized version of that sequence:</p>
+
+    <div class="log">
+      <div class="log-head">
+        <div class="log-dot" style="background: #d84444;"></div>
+        <div class="log-dot" style="background: var(--amber);"></div>
+        <div class="log-dot" style="background: var(--teal);"></div>
+        <span>query_history.log</span>
+      </div>
+      <div class="log-body">
+        <div class="log-row">
+          <div class="log-idx">01</div>
+          <div class="log-content">
+            <div class="q">Summarize the past week day-by-day, and flag where the plan fell short for the next event <span class="tag tag-build">build</span></div>
+            <div class="a">Produced a daily narrative from inference — reasonable, but not grounded in the actual operator action logs yet.</div>
+          </div>
+        </div>
+        <div class="log-row">
+          <div class="log-idx">02</div>
+          <div class="log-content">
+            <div class="q">Here are the actual logged actions for that week — redo it <span class="tag tag-fix">fix</span></div>
+            <div class="a">Replaced inference with ground truth. Surfaced the real top performers, the real overnight coverage gap, and one operator whose swaps were making the fleet worse, not better.</div>
+          </div>
+        </div>
+        <div class="log-row">
+          <div class="log-idx">03</div>
+          <div class="log-content">
+            <div class="q">What about the bike fleet specifically — highest revenue trips and where they start? <span class="tag tag-insight">insight</span></div>
+            <div class="a">Two bike models split cleanly by zone: one dominated the nightlife/park corridor, the other dominated the downtown/waterfront corridor. Neither model won everywhere.</div>
+          </div>
+        </div>
+        <div class="log-row">
+          <div class="log-idx">04</div>
+          <div class="log-content">
+            <div class="q">Calculate rides inside this exact event polygon, for this exact time window <span class="tag tag-build">build</span></div>
+            <div class="a">Point-in-polygon filtering against a real festival-boundary shape file, not an approximate radius. Precision mattered — the first polygon supplied was actually 2km from the venue in question.</div>
+          </div>
+        </div>
+        <div class="log-row">
+          <div class="log-idx">05</div>
+          <div class="log-content">
+            <div class="q">Wait — that day wasn't the event I thought it was <span class="tag tag-fix">fix</span></div>
+            <div class="a">A full recalibration. What had been treated as "no event, regular weekend" baseline data was actually the <em>first</em> festival's real performance — meaning it was a benchmark to beat, not a floor to compare against.</div>
+          </div>
+        </div>
+        <div class="log-row">
+          <div class="log-idx">06</div>
+          <div class="log-content">
+            <div class="q">Apply a historical attendance multiplier to project the next event's demand <span class="tag tag-build">build</span></div>
+            <div class="a">Turned one event's actuals into a forward-looking demand target for the next one — a simple multiplication that changed every staffing and battery-swap number downstream.</div>
+          </div>
+        </div>
+        <div class="log-row">
+          <div class="log-idx">07</div>
+          <div class="log-content">
+            <div class="q">How many battery swaps were actually needed to hit that target? <span class="tag tag-insight">insight</span></div>
+            <div class="a">Converted "the fleet felt low on battery" into an exact number: swaps completed vs. swaps required to hold average charge above a healthy threshold across the event window. The gap was the whole story.</div>
+          </div>
+        </div>
+        <div class="log-row">
+          <div class="log-idx">08</div>
+          <div class="log-content">
+            <div class="q">One of these workers is a mechanic, not a field operator <span class="tag tag-fix">fix</span></div>
+            <div class="a">A single correction that fixed every downstream grading table. Warehouse battery-diagnostic activity looks identical to bad field work in raw exports — same negative deltas — until you separate the role.</div>
+          </div>
+        </div>
+        <div class="log-row">
+          <div class="log-idx">09</div>
+          <div class="log-content">
+            <div class="q">Break every operator's swaps down by vehicle model <span class="tag tag-build">build</span></div>
+            <div class="a">A worker × model cross-tab exposed who specialized in which vehicle type, and confirmed the model with the worst uptime was also getting the least consistent field attention.</div>
+          </div>
+        </div>
+        <div class="log-row">
+          <div class="log-idx">10</div>
+          <div class="log-content">
+            <div class="q">Summarize everything as a portfolio case study, anonymized <span class="tag tag-insight">insight</span></div>
+            <div class="a">This page.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-section" id="lessons">
+    <div class="sec-label">03 — Lessons Learned</div>
+    <h2>What ten days of iterative querying actually taught</h2>
+
+    <div class="lesson-grid">
+      <div class="lesson">
+        <div class="lesson-num">Lesson 01</div>
+        <h3>Get the baseline right before you benchmark anything</h3>
+        <p>The single biggest correction in this whole process was realizing that a data window assumed to be a "normal, no-event weekend" was in fact the first festival's actual performance. Every downstream target had been calibrated against the wrong floor.</p>
+        <div class="example">
+          <div class="lbl">In Practice</div>
+          <p>Before setting any target number, explicitly confirm what conditions produced the comparison data — don't infer it from the calendar.</p>
+        </div>
+      </div>
+
+      <div class="lesson">
+        <div class="lesson-num">Lesson 02</div>
+        <h3>Raw activity logs conflate roles until you separate them</h3>
+        <p>A worker doing warehouse battery-pack diagnostics produces the exact same signature in the data — high starting charge, no completion reading, negative delta — as a field worker doing genuinely bad swaps. Grading them the same way punishes good workers and hides real problems.</p>
+        <div class="example">
+          <div class="lbl">In Practice</div>
+          <p>Classify by behavioral pattern (location, start/end values, shift timing) before calculating any performance average across a team.</p>
+        </div>
+      </div>
+
+      <div class="lesson">
+        <div class="lesson-num">Lesson 03</div>
+        <h3>Fleet-wide averages hide zone-specific truths</h3>
+        <p>Neither vehicle model was "better" in the abstract. One consistently earned more per trip in the park/nightlife corridor; the other won decisively downtown. A single fleet-wide revenue-per-ride number would have masked both facts and led to the wrong deployment call.</p>
+        <div class="example">
+          <div class="lbl">In Practice</div>
+          <p>Always cut performance metrics by the geography or context they occurred in before averaging them into one number.</p>
+        </div>
+      </div>
+
+      <div class="lesson">
+        <div class="lesson-num">Lesson 04</div>
+        <h3>Translate a felt problem into an exact number</h3>
+        <p>"The fleet felt low on charge all weekend" isn't actionable. Calculating exact swaps-completed vs. swaps-required against a target average charge turned a vague impression into a specific, schedulable gap.</p>
+        <div class="example">
+          <div class="lbl">In Practice</div>
+          <p>Whenever a problem is described qualitatively, look for the underlying quantity that would make the gap unambiguous.</p>
+        </div>
+      </div>
+
+      <div class="lesson">
+        <div class="lesson-num">Lesson 05</div>
+        <h3>Precision on scope changes the answer, not just the decimal places</h3>
+        <p>Filtering "rides in the general area" versus rides inside the exact festival boundary polygon, in the exact permitted time window, produced meaningfully different numbers — and the first boundary shape supplied was over a mile from the actual venue.</p>
+        <div class="example">
+          <div class="lbl">In Practice</div>
+          <p>Verify the geographic or temporal scope of an analysis against ground truth before trusting the output, especially when the source data was hand-entered.</p>
+        </div>
+      </div>
+
+      <div class="lesson">
+        <div class="lesson-num">Lesson 06</div>
+        <h3>The same operational gap will repeat unless the schedule structurally changes it</h3>
+        <p>An uncovered overnight window showed up as the same battery-health failure point across multiple event nights in the data. Naming it once wasn't enough — the fix had to be a specific shift reassignment, not a general reminder.</p>
+        <div class="example">
+          <div class="lbl">In Practice</div>
+          <p>When a pattern recurs across multiple independent data pulls, treat it as a structural scheduling problem, not a one-off execution miss.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-section" id="outcome">
+    <div class="sec-label">04 — Outcome</div>
+    <h2>What changed operationally</h2>
+    <p>By the time the second festival opened, the plan had shifted from a general "run it like last time" approach to a specific, numbered playbook:</p>
+    <ul class="outcome-list">
+      <li>
+        <div class="check">✓</div>
+        <div class="txt"><strong>A named battery-swap target</strong> for the event window, derived from the actual shortfall measured the week before — not a round-number guess.</div>
+      </li>
+      <li>
+        <div class="check">✓</div>
+        <div class="txt"><strong>Vehicle-model deployment split by zone</strong> — the model that earned more per trip in each specific corridor, not a single fleet-wide default.</div>
+      </li>
+      <li>
+        <div class="check">✓</div>
+        <div class="txt"><strong>An extended overnight shift</strong> covering the exact hours that had shown a repeated charge-depletion gap in the data.</div>
+      </li>
+      <li>
+        <div class="check">✓</div>
+        <div class="txt"><strong>Field-only performance grading</strong>, with warehouse diagnostic activity correctly excluded from operator scorecards.</div>
+      </li>
+      <li>
+        <div class="check">✓</div>
+        <div class="txt"><strong>A defended density floor</strong> in the highest-value zone, set from the exact point where competitive advantage had eroded the week before.</div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="case-section" id="method" style="border-bottom: none;">
+    <div class="sec-label">05 — Method</div>
+    <h2>How it was actually done</h2>
+    <p>Every number on this page came from directly querying raw exports — fleet telemetry, ride-level logs, action/task logs, and payroll timesheets — with natural-language analysis, point-in-polygon geographic filtering, and cross-tabulation, iterated in real time as new data arrived and old assumptions were corrected.</p>
+    <div class="method-tags">
+      <span class="method-tag">Fleet telemetry (GBFS)</span>
+      <span class="method-tag">Ride-level exports</span>
+      <span class="method-tag">Operator action logs</span>
+      <span class="method-tag">Payroll / timesheet cross-reference</span>
+      <span class="method-tag">Point-in-polygon geofencing</span>
+      <span class="method-tag">Competitive benchmark tracking</span>
+      <span class="method-tag">Iterative correction cycle</span>
+    </div>
+    <div class="note">
+      <div class="lbl">A note on this case study</div>
+      <p>All company names, exact figures, and identifying details have been removed or generalized. The analytical structure, the sequence of questions, and the lessons drawn from them are unaltered.</p>
+    </div>
+  </section>
+
+  <div class="case-footer">
+    <p>Case study · operational analytics under real-time event pressure · details anonymized for public sharing</p>
+  </div>
+</body>
+</html>
