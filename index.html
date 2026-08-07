@@ -1,0 +1,453 @@
+<!doctype html>
+<html data-theme="sunny">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Urban Transit Lab — Micromobility Demand Forecasting</title>
+  <link rel="stylesheet" href="https://steveneedham.github.io/design-system/styles.css">
+  <link rel="stylesheet" href="https://steveneedham.github.io/design-system/sunny.css">
+  <style>
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem var(--space-page-x) 4rem;
+      background: linear-gradient(135deg, #FFE4A3 0%, #FFD478 50%, #FFFAED 100%);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -5%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(255, 212, 120, 0.2) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: var(--text-eyebrow);
+      letter-spacing: var(--tracking-eyebrow);
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 1.6rem;
+      font-weight: 600;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 3.8rem;
+      line-height: 1.1;
+      max-width: 12ch;
+      margin: 0;
+      color: var(--text);
+    }
+
+    .hero h1 em {
+      color: var(--amber);
+      font-style: italic;
+    }
+
+    .hero p {
+      margin-top: 1.8rem;
+      max-width: 60ch;
+      color: var(--muted);
+      font-size: var(--text-body-lg);
+      line-height: var(--leading-body);
+    }
+
+    .hero-actions {
+      margin-top: 2.8rem;
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 1.8rem;
+      background: var(--amber);
+      color: var(--ink);
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: var(--text-mono-sm);
+      font-weight: 700;
+      letter-spacing: var(--tracking-label);
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all var(--motion-fast);
+      box-shadow: 0 4px 12px rgba(244, 165, 56, 0.2);
+    }
+
+    .cta-btn:hover {
+      background: #f0b04f;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(244, 165, 56, 0.3);
+    }
+
+    .cta-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 2px solid var(--text);
+      box-shadow: none;
+    }
+
+    .cta-secondary:hover {
+      border-color: var(--amber);
+      color: var(--amber);
+      background: rgba(244, 165, 56, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .content {
+      padding: 4rem var(--space-page-x);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      font-family: var(--font-mono);
+      font-size: var(--text-eyebrow);
+      letter-spacing: var(--tracking-eyebrow);
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: var(--text-h2);
+      margin: 0 0 2rem;
+      color: var(--text);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .feature-card {
+      background: var(--panel);
+      border: 2px solid var(--amber);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(244, 165, 56, 0.1);
+    }
+
+    .feature-card h3 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: var(--text-h4);
+      margin: 0 0 0.8rem;
+      color: var(--text);
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      margin: 0;
+      font-size: var(--text-body-sm);
+      line-height: var(--leading-body);
+    }
+
+    .feature-card.sys {
+      border-color: var(--teal);
+    }
+
+    .feature-card.sys h3 {
+      color: var(--teal);
+    }
+
+    .data-section {
+      background: var(--panel);
+      border: 2px solid var(--amber);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      margin-bottom: 4rem;
+      box-shadow: 0 4px 12px rgba(244, 165, 56, 0.1);
+    }
+
+    .data-section h3 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: var(--text-h3);
+      margin: 0 0 1.5rem;
+      color: var(--text);
+    }
+
+    .data-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .data-item {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .data-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 4px;
+      background: var(--amber);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .data-icon.sys {
+      background: var(--teal);
+    }
+
+    .data-item strong {
+      color: var(--text);
+      font-size: var(--text-body-sm);
+      font-family: var(--font-mono);
+      display: block;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .data-item span {
+      color: var(--muted);
+      font-size: var(--text-body-sm);
+    }
+
+    .about-section {
+      padding: 3rem 0;
+      max-width: 68ch;
+      margin: 0 auto;
+    }
+
+    .about-section h2 {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: var(--text-h2);
+      margin: 0 0 1.5rem;
+      color: var(--text);
+    }
+
+    .about-section p {
+      color: var(--muted);
+      margin: 0 0 1.2rem;
+      font-size: var(--text-body);
+      line-height: var(--leading-body);
+    }
+
+    .about-section p + p {
+      margin-top: 1.2rem;
+    }
+
+    .about-section strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .footer {
+      padding: 3rem var(--space-page-x) 2rem;
+      border-top: 2px solid var(--amber);
+      background: var(--panel);
+      text-align: center;
+    }
+
+    .footer p {
+      color: var(--muted);
+      margin: 0;
+      font-size: var(--text-body-sm);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: var(--text-mono-sm);
+    }
+
+    .footer-links a {
+      color: var(--amber);
+      text-decoration: none;
+      transition: color var(--motion-fast);
+    }
+
+    .footer-links a:hover {
+      color: #f0b04f;
+    }
+
+    @media (max-width: 900px) {
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+
+      .features-grid,
+      .data-list {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .cta-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <div class="nav-name">Urban Transit Lab</div>
+    <div class="nav-links">
+      <a href="#forecast">Forecast</a>
+      <a href="#data">Data</a>
+      <a href="#about">About</a>
+      <a href="https://github.com/steveneedham/urban-transit-lab-predictor" target="_blank">GitHub</a>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Demand Intelligence</div>
+      <h1>Forecast <em>micromobility</em> demand</h1>
+      <p>Use GBFS historical data, weather patterns, and event signals to predict bike and scooter demand with confidence. Optimize fleet deployment and station rebalancing in real time.</p>
+      <div class="hero-actions">
+        <a href="forecast.html" class="cta-btn">Open Forecast</a>
+        <a href="#data" class="cta-secondary cta-btn">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="content">
+    <section id="data">
+      <div class="section-eyebrow">What We Forecast</div>
+      <h2 class="section-title">Accurate, Actionable Predictions</h2>
+
+      <div class="features-grid">
+        <div class="feature-card ops">
+          <h3>Trip Volume</h3>
+          <p>24-hour demand patterns segmented by hour, day type, and zone. Peak demand windows with 92%+ confidence on short-term forecasts.</p>
+        </div>
+
+        <div class="feature-card sys">
+          <h3>Station Availability</h3>
+          <p>Predict bike/scooter distribution across station networks. Identify rebalancing needs before stockouts occur and optimize dispatch.</p>
+        </div>
+
+        <div class="feature-card ops">
+          <h3>Geographic Hotspots</h3>
+          <p>Zone-level demand forecasts. Focus resources on high-demand areas: downtown, transit hubs, university districts, and residential corridors.</p>
+        </div>
+
+        <div class="feature-card sys">
+          <h3>Confidence Intervals</h3>
+          <p>Every forecast includes estimated uncertainty. Weather events, one-off incidents, and edge cases are surfaced explicitly.</p>
+        </div>
+      </div>
+
+      <div class="data-section">
+        <h3>Inputs & Signals</h3>
+        <div class="data-list">
+          <div class="data-item">
+            <div class="data-icon">📊</div>
+            <div>
+              <strong>GBFS Trip Data</strong>
+              <span>90+ days of historical bike/scooter usage from live feeds</span>
+            </div>
+          </div>
+
+          <div class="data-item">
+            <div class="data-icon sys">🌤</div>
+            <div>
+              <strong>Weather Patterns</strong>
+              <span>Temperature, precipitation, wind speed effects on demand</span>
+            </div>
+          </div>
+
+          <div class="data-item">
+            <div class="data-icon">📅</div>
+            <div>
+              <strong>Day-Type Effects</strong>
+              <span>Weekday/weekend/holiday demand splits, seasonal curves</span>
+            </div>
+          </div>
+
+          <div class="data-item">
+            <div class="data-icon sys">🎯</div>
+            <div>
+              <strong>Event Signals</strong>
+              <span>Recurring events (commute peaks, sports games, festivals)</span>
+            </div>
+          </div>
+
+          <div class="data-item">
+            <div class="data-icon">🗺</div>
+            <div>
+              <strong>Geographic Context</strong>
+              <span>Zone demand patterns, station proximity, land use type</span>
+            </div>
+          </div>
+
+          <div class="data-item">
+            <div class="data-icon sys">⏰</div>
+            <div>
+              <strong>Time Series</strong>
+              <span>Intraday patterns, day-to-day volatility, trend direction</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section" id="about">
+      <div class="section-eyebrow">Project</div>
+      <h2>What Can Be Accurately Forecast</h2>
+      <p>Micromobility demand is highly predictable in the short term (hours to days ahead) when you have the right data. GBFS trip history shows clear, repeating patterns: commute peaks, weekend leisure demand, weather sensitivity, and stable day-of-week effects all drive usage in measurable ways.</p>
+
+      <p><strong>Strong signals:</strong> Historical patterns dominate. If Tuesday at 8 AM always shows peak commute demand, next Tuesday at 8 AM will too—weather and calendar type accounted for. Intraday forecasts (1–7 days out) reach 15–25% MAPE (mean absolute percentage error) with baseline time-series models. Adding structured weather and event data tightens this further.</p>
+
+      <p><strong>Where accuracy falls off:</strong> One-off events (stadium games, street closures) create noise outside the historical distribution. New infrastructure (bike lane, office building) shifts the baseline in ways the model can't see. Black-swan disruptions (extreme weather, service outages) require explicit handling. But for routine operations—day-to-day demand planning, fleet sizing, rebalancing schedules—GBFS data is predictive enough to optimize real decisions.</p>
+
+      <p>This tool bridges the gap: it shows what's reliably forecastable from public data and where external signals (event APIs, weather feeds) unlock additional accuracy. Use it to understand your demand surface and plan accordingly.</p>
+    </section>
+  </div>
+
+  <footer class="footer">
+    <p>Urban Transit Lab — Micromobility Demand Forecasting</p>
+    <div class="footer-links">
+      <a href="forecast.html">Forecast</a>
+      <a href="https://github.com/steveneedham/urban-transit-lab-predictor">GitHub</a>
+      <a href="https://steveneedham.com">About</a>
+    </div>
+    <p style="margin-top: 1rem; font-size: var(--text-mono-xs); color: var(--muted-dim);">Built with GBFS data • Sunny theme variant</p>
+  </footer>
+</body>
+</html>

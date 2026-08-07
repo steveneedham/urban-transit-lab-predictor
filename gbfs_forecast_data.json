@@ -1,0 +1,1040 @@
+{
+  "analysis_date": "2026-08-07T23:03:45.845561Z",
+  "snapshot_count": 44,
+  "hourly_patterns": {
+    "Monday": [
+      {
+        "hour": "00:00",
+        "demand": 40,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "01:00",
+        "demand": 40,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "02:00",
+        "demand": 37,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "03:00",
+        "demand": 36,
+        "confidence": 0.75,
+        "sample_size": 3539
+      },
+      {
+        "hour": "04:00",
+        "demand": 39,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "05:00",
+        "demand": 120,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "06:00",
+        "demand": 143,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "07:00",
+        "demand": 151,
+        "confidence": 0.75,
+        "sample_size": 3575
+      },
+      {
+        "hour": "08:00",
+        "demand": 154,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "09:00",
+        "demand": 111,
+        "confidence": 0.75,
+        "sample_size": 3542
+      },
+      {
+        "hour": "10:00",
+        "demand": 137,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "11:00",
+        "demand": 146,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "12:00",
+        "demand": 149,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "13:00",
+        "demand": 150,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "14:00",
+        "demand": 150,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "15:00",
+        "demand": 193,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "16:00",
+        "demand": 251,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "17:00",
+        "demand": 270,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "18:00",
+        "demand": 250,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "19:00",
+        "demand": 217,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "20:00",
+        "demand": 206,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "21:00",
+        "demand": 149,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "22:00",
+        "demand": 76,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "23:00",
+        "demand": 58,
+        "confidence": 0.7,
+        "sample_size": 0
+      }
+    ],
+    "Tuesday": [
+      {
+        "hour": "00:00",
+        "demand": 40,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "01:00",
+        "demand": 40,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "02:00",
+        "demand": 40,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "03:00",
+        "demand": 40,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "04:00",
+        "demand": 40,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "05:00",
+        "demand": 37,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "06:00",
+        "demand": 116,
+        "confidence": 0.75,
+        "sample_size": 3511
+      },
+      {
+        "hour": "07:00",
+        "demand": 225,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "08:00",
+        "demand": 178,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "09:00",
+        "demand": 79,
+        "confidence": 0.75,
+        "sample_size": 3498
+      },
+      {
+        "hour": "10:00",
+        "demand": 86,
+        "confidence": 0.75,
+        "sample_size": 3502
+      },
+      {
+        "hour": "11:00",
+        "demand": 129,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "12:00",
+        "demand": 143,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "13:00",
+        "demand": 148,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "14:00",
+        "demand": 149,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "15:00",
+        "demand": 193,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "16:00",
+        "demand": 251,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "17:00",
+        "demand": 217,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "18:00",
+        "demand": 122,
+        "confidence": 0.75,
+        "sample_size": 3324
+      },
+      {
+        "hour": "19:00",
+        "demand": 117,
+        "confidence": 0.75,
+        "sample_size": 3519
+      },
+      {
+        "hour": "20:00",
+        "demand": 116,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "21:00",
+        "demand": 62,
+        "confidence": 0.75,
+        "sample_size": 3516
+      },
+      {
+        "hour": "22:00",
+        "demand": 47,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "23:00",
+        "demand": 44,
+        "confidence": 0.7,
+        "sample_size": 0
+      }
+    ],
+    "Wednesday": [
+      {
+        "hour": "00:00",
+        "demand": 40,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "01:00",
+        "demand": 40,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "02:00",
+        "demand": 40,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "03:00",
+        "demand": 47,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "04:00",
+        "demand": 50,
+        "confidence": 0.8,
+        "sample_size": 6842
+      },
+      {
+        "hour": "05:00",
+        "demand": 40,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "06:00",
+        "demand": 117,
+        "confidence": 0.75,
+        "sample_size": 3455
+      },
+      {
+        "hour": "07:00",
+        "demand": 226,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "08:00",
+        "demand": 262,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "09:00",
+        "demand": 191,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "10:00",
+        "demand": 84,
+        "confidence": 0.75,
+        "sample_size": 3493
+      },
+      {
+        "hour": "11:00",
+        "demand": 88,
+        "confidence": 0.8,
+        "sample_size": 6990
+      },
+      {
+        "hour": "12:00",
+        "demand": 89,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "13:00",
+        "demand": 90,
+        "confidence": 0.8,
+        "sample_size": 6981
+      },
+      {
+        "hour": "14:00",
+        "demand": 130,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "15:00",
+        "demand": 187,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "16:00",
+        "demand": 166,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "17:00",
+        "demand": 159,
+        "confidence": 0.8,
+        "sample_size": 7031
+      },
+      {
+        "hour": "18:00",
+        "demand": 213,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "19:00",
+        "demand": 148,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "20:00",
+        "demand": 126,
+        "confidence": 0.8,
+        "sample_size": 7006
+      },
+      {
+        "hour": "21:00",
+        "demand": 119,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "22:00",
+        "demand": 63,
+        "confidence": 0.75,
+        "sample_size": 3516
+      },
+      {
+        "hour": "23:00",
+        "demand": 52,
+        "confidence": 0.7,
+        "sample_size": 0
+      }
+    ],
+    "Thursday": [
+      {
+        "hour": "00:00",
+        "demand": 35,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "01:00",
+        "demand": 35,
+        "confidence": 0.75,
+        "sample_size": 3072
+      },
+      {
+        "hour": "02:00",
+        "demand": 38,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "03:00",
+        "demand": 39,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "04:00",
+        "demand": 40,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "05:00",
+        "demand": 37,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "06:00",
+        "demand": 116,
+        "confidence": 0.75,
+        "sample_size": 3485
+      },
+      {
+        "hour": "07:00",
+        "demand": 225,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "08:00",
+        "demand": 178,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "09:00",
+        "demand": 79,
+        "confidence": 0.75,
+        "sample_size": 3550
+      },
+      {
+        "hour": "10:00",
+        "demand": 86,
+        "confidence": 0.75,
+        "sample_size": 3495
+      },
+      {
+        "hour": "11:00",
+        "demand": 89,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "12:00",
+        "demand": 90,
+        "confidence": 0.75,
+        "sample_size": 3529
+      },
+      {
+        "hour": "13:00",
+        "demand": 130,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "14:00",
+        "demand": 143,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "15:00",
+        "demand": 191,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "16:00",
+        "demand": 250,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "17:00",
+        "demand": 217,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "18:00",
+        "demand": 179,
+        "confidence": 0.75,
+        "sample_size": 1911
+      },
+      {
+        "hour": "19:00",
+        "demand": 193,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "20:00",
+        "demand": 198,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "21:00",
+        "demand": 146,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "22:00",
+        "demand": 75,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "23:00",
+        "demand": 58,
+        "confidence": 0.7,
+        "sample_size": 0
+      }
+    ],
+    "Friday": [
+      {
+        "hour": "00:00",
+        "demand": 30,
+        "confidence": 0.8,
+        "sample_size": 7017
+      },
+      {
+        "hour": "01:00",
+        "demand": 33,
+        "confidence": 0.8,
+        "sample_size": 7177
+      },
+      {
+        "hour": "02:00",
+        "demand": 38,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "03:00",
+        "demand": 39,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "04:00",
+        "demand": 36,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "05:00",
+        "demand": 115,
+        "confidence": 0.9,
+        "sample_size": 12493
+      },
+      {
+        "hour": "06:00",
+        "demand": 225,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "07:00",
+        "demand": 262,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "08:00",
+        "demand": 191,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "09:00",
+        "demand": 124,
+        "confidence": 0.8,
+        "sample_size": 7013
+      },
+      {
+        "hour": "10:00",
+        "demand": 141,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "11:00",
+        "demand": 147,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "12:00",
+        "demand": 149,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "13:00",
+        "demand": 150,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "14:00",
+        "demand": 150,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "15:00",
+        "demand": 193,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "16:00",
+        "demand": 251,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "17:00",
+        "demand": 270,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "18:00",
+        "demand": 250,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "19:00",
+        "demand": 160,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "20:00",
+        "demand": 130,
+        "confidence": 0.8,
+        "sample_size": 6861
+      },
+      {
+        "hour": "21:00",
+        "demand": 123,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "22:00",
+        "demand": 68,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "23:00",
+        "demand": 54,
+        "confidence": 0.7,
+        "sample_size": 0
+      }
+    ],
+    "Saturday": [
+      {
+        "hour": "00:00",
+        "demand": 40,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "01:00",
+        "demand": 40,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "02:00",
+        "demand": 40,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "03:00",
+        "demand": 40,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "04:00",
+        "demand": 40,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "05:00",
+        "demand": 148,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "06:00",
+        "demand": 292,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "07:00",
+        "demand": 340,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "08:00",
+        "demand": 356,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "09:00",
+        "demand": 290,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "10:00",
+        "demand": 197,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "11:00",
+        "demand": 126,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "12:00",
+        "demand": 102,
+        "confidence": 0.75,
+        "sample_size": 3361
+      },
+      {
+        "hour": "13:00",
+        "demand": 134,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "14:00",
+        "demand": 145,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "15:00",
+        "demand": 220,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "16:00",
+        "demand": 316,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "17:00",
+        "demand": 348,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "18:00",
+        "demand": 304,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "19:00",
+        "demand": 235,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "20:00",
+        "demand": 212,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "21:00",
+        "demand": 151,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "22:00",
+        "demand": 77,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "23:00",
+        "demand": 58,
+        "confidence": 0.7,
+        "sample_size": 0
+      }
+    ],
+    "Sunday": [
+      {
+        "hour": "00:00",
+        "demand": 40,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "01:00",
+        "demand": 40,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "02:00",
+        "demand": 40,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "03:00",
+        "demand": 40,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "04:00",
+        "demand": 40,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "05:00",
+        "demand": 37,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "06:00",
+        "demand": 144,
+        "confidence": 0.75,
+        "sample_size": 3513
+      },
+      {
+        "hour": "07:00",
+        "demand": 291,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "08:00",
+        "demand": 228,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "09:00",
+        "demand": 136,
+        "confidence": 0.8,
+        "sample_size": 7059
+      },
+      {
+        "hour": "10:00",
+        "demand": 145,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "11:00",
+        "demand": 148,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "12:00",
+        "demand": 149,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "13:00",
+        "demand": 150,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "14:00",
+        "demand": 150,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "15:00",
+        "demand": 221,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "16:00",
+        "demand": 316,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "17:00",
+        "demand": 348,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "18:00",
+        "demand": 304,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "19:00",
+        "demand": 235,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "20:00",
+        "demand": 212,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "21:00",
+        "demand": 151,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "22:00",
+        "demand": 77,
+        "confidence": 0.7,
+        "sample_size": 0
+      },
+      {
+        "hour": "23:00",
+        "demand": 58,
+        "confidence": 0.7,
+        "sample_size": 0
+      }
+    ]
+  },
+  "geographic_demand": {
+    "Downtown Core": 0,
+    "University District": 0,
+    "Transit Hubs": 0,
+    "Residential North": 0,
+    "Residential East": 0
+  },
+  "summary": {
+    "days_analyzed": 19,
+    "total_observations": 150376,
+    "avg_fleet_size": 4851
+  }
+}
