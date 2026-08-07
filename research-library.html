@@ -1,0 +1,387 @@
+<!doctype html>
+<html data-theme="sunny">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Research Library · Urban Transit Lab</title>
+  <meta name="description" content="Forecast guides, source inventories, and demand-analysis references for micromobility research.">
+  <link rel="stylesheet" href="https://steveneedham.github.io/design-system/styles.css">
+  <link rel="stylesheet" href="https://steveneedham.github.io/design-system/sunny.css">
+  <style>
+    .library-header {
+      padding: 3rem var(--space-page-x) 2rem;
+      border-bottom: 2px solid var(--amber);
+    }
+
+    .library-header .eyebrow {
+      color: var(--amber);
+      font-family: var(--font-mono);
+      font-size: var(--text-eyebrow);
+      letter-spacing: var(--tracking-eyebrow);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      border: none;
+    }
+
+    .library-header h1 {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: var(--text-h1);
+      margin: 0;
+      color: var(--text);
+    }
+
+    .library-header p {
+      color: var(--muted);
+      margin: 1rem 0 0;
+      max-width: 68ch;
+    }
+
+    .library-content {
+      padding: 3rem var(--space-page-x);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      color: var(--amber);
+      font-family: var(--font-mono);
+      font-size: var(--text-eyebrow);
+      letter-spacing: var(--tracking-eyebrow);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .library-section h2 {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: var(--text-h2);
+      margin: 0 0 1rem;
+      color: var(--text);
+    }
+
+    .library-intro {
+      max-width: 68ch;
+      color: var(--muted);
+      margin: 0 0 2rem;
+      font-size: var(--text-body);
+    }
+
+    .reference-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      border-top: 2px solid var(--amber);
+      margin-bottom: 3rem;
+    }
+
+    .reference-item {
+      padding: 2rem;
+      border-bottom: 2px solid var(--amber);
+      border-right: 2px solid var(--amber);
+    }
+
+    .reference-item:nth-child(even) {
+      border-right: none;
+    }
+
+    .reference-item:nth-child(n+3) {
+      border-bottom: none;
+    }
+
+    .reference-label {
+      color: var(--amber);
+      font-family: var(--font-mono);
+      font-size: var(--text-mono-xs);
+      letter-spacing: var(--tracking-label);
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+
+    .reference-item h3 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: var(--text-h3);
+      margin: 0 0 0.8rem;
+      color: var(--text);
+    }
+
+    .reference-item p {
+      color: var(--muted);
+      margin: 0 0 1.2rem;
+      font-size: var(--text-body-sm);
+      line-height: var(--leading-body);
+    }
+
+    .reference-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      font-family: var(--font-mono);
+      font-size: var(--text-mono-sm);
+    }
+
+    .reference-links a {
+      color: var(--amber);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color var(--motion-fast);
+    }
+
+    .reference-links a:hover {
+      color: #f0b04f;
+    }
+
+    .forecast-visuals {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .forecast-visual {
+      margin: 0;
+      padding: 0;
+    }
+
+    .forecast-visual img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 2px solid var(--amber);
+      border-radius: var(--radius-md);
+      background: var(--panel);
+    }
+
+    .forecast-visual figcaption {
+      margin-top: 1rem;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: var(--text-mono-xs);
+      line-height: 1.5;
+    }
+
+    .forecast-visual figcaption a {
+      color: var(--amber);
+      text-decoration: none;
+      transition: color var(--motion-fast);
+    }
+
+    .forecast-visual figcaption a:hover {
+      color: #f0b04f;
+    }
+
+    .library-section {
+      margin-bottom: 4rem;
+    }
+
+    .library-footer {
+      text-align: center;
+      padding: 3rem var(--space-page-x) 2rem;
+      border-top: 2px solid var(--amber);
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: var(--text-mono-xs);
+    }
+
+    @media (max-width: 900px) {
+      .reference-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .reference-item {
+        border-right: none;
+      }
+
+      .reference-item:nth-child(n+2) {
+        border-bottom: 2px solid var(--amber);
+      }
+
+      .forecast-visuals {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <div class="nav-name">Urban Transit Lab</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="forecast.html">Forecast</a>
+      <a href="research-library.html">Research</a>
+      <a href="https://github.com/steveneedham/urban-transit-lab-predictor" target="_blank">GitHub</a>
+    </div>
+  </div>
+
+  <header class="library-header">
+    <div class="section-eyebrow">Resources</div>
+    <h1>Research Library</h1>
+    <p>Forecast guides, source inventories, project cards, and comparable analysis charts. Each artifact remains labeled by source so its provenance is visible.</p>
+  </header>
+
+  <main class="library-content">
+    <section class="library-section">
+      <div class="section-eyebrow">Reference Artifacts · August 2026</div>
+      <h2>Forecast Source Guides & Inventories</h2>
+      <p class="library-intro">Working artifacts document the event, holiday, ISO-week, and weather context used for demand planning. ChatGPT and Claude reference sets are retained separately so their methodological provenance remains visible for comparison.</p>
+
+      <div class="reference-grid">
+        <article class="reference-item">
+          <div class="reference-label">ChatGPT · Field Edition</div>
+          <h3>ChatGPT Forecast</h3>
+          <p>Branded operating guide with event and holiday separation, ISO-week correlation, historical weather patterns, projected weather-risk caveats, and source methodology for demand forecasting.</p>
+          <div class="reference-links">
+            <a href="https://github.com/steveneedham/columbus-micromobility-data/raw/main/ChatGPT%20Forecast.docx" download>Word guide →</a>
+            <a href="https://github.com/steveneedham/columbus-micromobility-data/raw/main/ChatGPT%20Forecast.xlsx" download>Excel inventory →</a>
+          </div>
+        </article>
+
+        <article class="reference-item">
+          <div class="reference-label">Claude · Reference Edition</div>
+          <h3>Claude Forecast</h3>
+          <p>Companion source guide and historical event workbook retained as supplied for methodological comparison and reference. Includes event records, ISO-week series, projected weeks, and joining logic.</p>
+          <div class="reference-links">
+            <a href="https://github.com/steveneedham/columbus-micromobility-data/raw/main/Claude%20Forecast%20-%20Columbus_Micromobility_Event_Demand_Sources_branded.docx" download>Word guide →</a>
+            <a href="https://github.com/steveneedham/columbus-micromobility-data/raw/main/Claude%20Forecast%200%20Columbus_Micromobility_Events_Historical_2024-2026.xlsx" download>Excel inventory →</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="forecast-visuals">
+        <figure class="forecast-visual">
+          <img src="https://raw.githubusercontent.com/steveneedham/columbus-micromobility-data/main/demand-forecast-card.svg" alt="ChatGPT Forecast project card summarizing canonical events, holidays, weather-risk days, and ISO-week methodology">
+          <figcaption>ChatGPT Forecast card — Event-driven demand methodology</figcaption>
+        </figure>
+        <figure class="forecast-visual">
+          <img src="https://raw.githubusercontent.com/steveneedham/columbus-micromobility-data/main/claude-demand-forecast-card.svg" alt="Claude Forecast project card summarizing event records, ISO-week series, projected weeks, and joining methodology">
+          <figcaption>Claude Forecast card — Historical event series & projections</figcaption>
+        </figure>
+      </div>
+
+      <div class="forecast-visuals">
+        <figure class="forecast-visual">
+          <img src="https://raw.githubusercontent.com/steveneedham/columbus-micromobility-data/main/demand-forecast-chart.svg" alt="ChatGPT Analysis chart showing confirmed or logged events, projected additional events, and same-week baselines for ISO weeks 32–53 of 2026">
+          <figcaption>ChatGPT Analysis — Workbook-derived event projection (weeks 32–53)</figcaption>
+        </figure>
+        <figure class="forecast-visual">
+          <img src="https://raw.githubusercontent.com/steveneedham/columbus-micromobility-data/main/claude-demand-forecast-chart.svg" alt="Claude Analysis chart showing confirmed or logged events, projected additional events, and same-week baselines for ISO weeks 32–53 of 2026">
+          <figcaption>Claude Analysis — Workbook-derived event projection (weeks 32–53)</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="library-section">
+      <div class="section-eyebrow">Events Database</div>
+      <h2>Canonical Events Viewer</h2>
+      <p class="library-intro">90 events from the ChatGPT Forecast model (2024–2026). Search by name, category, or area to see impact tier and dates.</p>
+
+      <div style="margin-bottom: 2rem;">
+        <input type="text" id="eventSearch" placeholder="Search events..." style="width: 100%; padding: 0.75rem; border: 2px solid var(--amber); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: var(--text-body);">
+      </div>
+
+      <div style="overflow-x: auto; border: 2px solid var(--amber); border-radius: var(--radius-sm);">
+        <table id="eventsTable" style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+          <thead style="background: var(--amber); color: var(--ink);">
+            <tr>
+              <th style="padding: 0.8rem; text-align: left; font-weight: 600;">Event ID</th>
+              <th style="padding: 0.8rem; text-align: left; font-weight: 600;">Event Name</th>
+              <th style="padding: 0.8rem; text-align: left; font-weight: 600;">Category</th>
+              <th style="padding: 0.8rem; text-align: left; font-weight: 600;">Area</th>
+              <th style="padding: 0.8rem; text-align: center; font-weight: 600;">Impact</th>
+              <th style="padding: 0.8rem; text-align: left; font-weight: 600;">Dates</th>
+            </tr>
+          </thead>
+          <tbody id="eventsBody">
+          </tbody>
+        </table>
+      </div>
+
+      <p style="margin-top: 1rem; color: var(--muted); font-size: var(--text-body-sm);">
+        <span id="eventCount">Loading...</span> events · Source: ChatGPT Forecast Excel workbook
+      </p>
+    </section>
+
+    <section class="library-section">
+      <div class="section-eyebrow">About This Library</div>
+      <h2>Methodology & Data Sources</h2>
+      <p class="library-intro">These guides and charts represent two independent forecasting approaches applied to the same Columbus GBFS fleet data. Both use historical event catalogs, ISO-week correlations, and weather signals to project demand. The side-by-side comparison enables validation and cross-methodological review.</p>
+      <p class="library-intro"><strong>Data lineage:</strong> All forecasts derive from public GBFS feeds (Spin and Veo), publicly available holiday/event calendars, and historical weather records. No proprietary data. Full methodologies documented in the Word guides.</p>
+    </section>
+  </main>
+
+  <footer class="library-footer">
+    <p>© 2026 Steven Needham · Urban Transit Lab · Public data and open methodology</p>
+    <div style="margin-top: 1rem; display: flex; gap: 1.5rem; justify-content: center; font-family: var(--font-mono); font-size: var(--text-mono-sm);">
+      <a href="https://steveneedham.github.io/portfolio/" style="color: var(--amber); text-decoration: none;">Portfolio</a>
+      <a href="https://steveneedham.github.io/portfolio/ways-i-can-help.html" style="color: var(--amber); text-decoration: none;">Urban Strategies</a>
+    </div>
+  </footer>
+
+  <script>
+    // Load and display events data
+    async function loadEvents() {
+      try {
+        const response = await fetch('chatgpt_events.json');
+        const data = await response.json();
+
+        const tbody = document.getElementById('eventsBody');
+        const countSpan = document.getElementById('eventCount');
+        const searchInput = document.getElementById('eventSearch');
+
+        countSpan.textContent = `${data.count}`;
+
+        // Function to render events
+        function renderEvents(events) {
+          tbody.innerHTML = events.map((event, idx) => `
+            <tr style="border-bottom: 1px solid var(--panel-line); ${idx % 2 === 0 ? 'background: rgba(244, 165, 56, 0.02);' : ''}">
+              <td style="padding: 0.8rem; font-family: var(--font-mono); font-size: 0.85rem; color: var(--amber);">${event.event_id}</td>
+              <td style="padding: 0.8rem; font-weight: 500;">${event.event_name}</td>
+              <td style="padding: 0.8rem; color: var(--muted); font-size: 0.9rem;">${event.category}</td>
+              <td style="padding: 0.8rem; color: var(--muted); font-size: 0.9rem;">${event.area}</td>
+              <td style="padding: 0.8rem; text-align: center;">
+                <span style="display: inline-block; padding: 0.3rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 600; ${
+                  event.impact_tier === 'Very High' ? 'background: var(--amber); color: var(--ink);' :
+                  event.impact_tier === 'High' ? 'background: var(--teal); color: var(--ink);' :
+                  'background: var(--panel-line); color: var(--text);'
+                }">
+                  ${event.impact_tier}
+                </span>
+              </td>
+              <td style="padding: 0.8rem; font-size: 0.9rem; white-space: nowrap;">
+                ${event.start_date}${event.end_date !== event.start_date ? ` → ${event.end_date}` : ''}
+              </td>
+            </tr>
+          `).join('');
+        }
+
+        // Initial render
+        renderEvents(data.events);
+
+        // Search functionality
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          const filtered = data.events.filter(event =>
+            event.event_name.toLowerCase().includes(query) ||
+            event.category.toLowerCase().includes(query) ||
+            event.area.toLowerCase().includes(query) ||
+            event.event_id.toLowerCase().includes(query)
+          );
+          renderEvents(filtered);
+          countSpan.textContent = `${filtered.length}`;
+        });
+
+      } catch (error) {
+        console.error('Error loading events:', error);
+        document.getElementById('eventsBody').innerHTML = '<tr><td colspan="6" style="padding: 2rem; text-align: center; color: var(--muted);">Error loading events data</td></tr>';
+      }
+    }
+
+    // Load on page load
+    document.addEventListener('DOMContentLoaded', loadEvents);
+  </script>
+</body>
+</html>
