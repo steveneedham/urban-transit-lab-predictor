@@ -1,0 +1,433 @@
+<!doctype html>
+<html data-theme="sunny">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Research Roadmap · Urban Transit Lab</title>
+  <link rel="stylesheet" href="https://steveneedham.github.io/design-system/styles.css">
+  <link rel="stylesheet" href="https://steveneedham.github.io/design-system/sunny.css">
+  <style>
+    .roadmap-header {
+      padding: 3rem var(--space-page-x) 2rem;
+      border-bottom: 2px solid var(--amber);
+    }
+
+    .roadmap-header .eyebrow {
+      color: var(--amber);
+      font-family: var(--font-mono);
+      font-size: var(--text-eyebrow);
+      letter-spacing: var(--tracking-eyebrow);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      border: none;
+    }
+
+    .roadmap-header h1 {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: var(--text-h1);
+      margin: 0;
+      color: var(--text);
+    }
+
+    .roadmap-header p {
+      color: var(--muted);
+      margin: 1rem 0 0;
+      max-width: 68ch;
+    }
+
+    .roadmap-content {
+      padding: 3rem var(--space-page-x);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .roadmap-intro {
+      margin-bottom: 3rem;
+      padding: 2rem;
+      background: var(--panel);
+      border: 2px solid var(--amber);
+      border-radius: var(--radius-md);
+    }
+
+    .roadmap-intro p {
+      color: var(--muted);
+      margin: 0 0 1rem;
+      font-size: var(--text-body);
+      line-height: var(--leading-body);
+    }
+
+    .roadmap-intro p:last-child {
+      margin-bottom: 0;
+    }
+
+    .roadmap-items {
+      display: grid;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .roadmap-item {
+      padding: 2rem;
+      background: var(--panel);
+      border: 2px solid var(--amber);
+      border-radius: var(--radius-md);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .roadmap-item.completed {
+      background: rgba(32, 178, 170, 0.03);
+      border-color: var(--teal);
+    }
+
+    .roadmap-item.in-progress {
+      background: rgba(244, 165, 56, 0.03);
+    }
+
+    .roadmap-item-content h3 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: var(--text-h3);
+      margin: 0 0 0.8rem;
+      color: var(--text);
+    }
+
+    .roadmap-item-content p {
+      color: var(--muted);
+      margin: 0 0 1rem;
+      font-size: var(--text-body-sm);
+      line-height: var(--leading-body);
+    }
+
+    .roadmap-item-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .discovery-note {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: rgba(32, 178, 170, 0.05);
+      border-left: 3px solid var(--teal);
+      border-radius: 3px;
+      font-size: var(--text-body-sm);
+      color: var(--text);
+    }
+
+    .discovery-note strong {
+      color: var(--teal);
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: var(--text-mono-xs);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .roadmap-item-status {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      align-items: flex-end;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: var(--text-mono-xs);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .status-badge.pending {
+      background: var(--panel-line);
+      color: var(--text);
+    }
+
+    .status-badge.in-progress {
+      background: var(--amber);
+      color: var(--ink);
+    }
+
+    .status-badge.completed {
+      background: var(--teal);
+      color: var(--ink);
+    }
+
+    .status-badge::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.6;
+    }
+
+    .roadmap-section {
+      margin-bottom: 4rem;
+    }
+
+    .roadmap-section-title {
+      font-family: var(--font-mono);
+      font-size: var(--text-eyebrow);
+      letter-spacing: var(--tracking-eyebrow);
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--amber);
+    }
+
+    .progress-summary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .progress-card {
+      padding: 1.5rem;
+      background: var(--panel);
+      border: 2px solid var(--amber);
+      border-radius: var(--radius-md);
+      text-align: center;
+    }
+
+    .progress-card .count {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 600;
+      color: var(--amber);
+      margin-bottom: 0.5rem;
+    }
+
+    .progress-card .label {
+      font-family: var(--font-mono);
+      font-size: var(--text-mono-xs);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .roadmap-footer {
+      text-align: center;
+      padding: 3rem var(--space-page-x) 2rem;
+      border-top: 2px solid var(--amber);
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: var(--text-mono-xs);
+    }
+
+    @media (max-width: 900px) {
+      .roadmap-item {
+        grid-template-columns: 1fr;
+      }
+
+      .roadmap-item-status {
+        align-items: flex-start;
+      }
+
+      .progress-summary {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <div class="nav-name">Urban Transit Lab</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="forecast.html">Forecast</a>
+      <a href="research-library.html">Research</a>
+      <a href="roadmap.html">Roadmap</a>
+      <a href="https://github.com/steveneedham/urban-transit-lab-predictor" target="_blank">GitHub</a>
+    </div>
+  </div>
+
+  <header class="roadmap-header">
+    <div class="eyebrow">Discovery & Development</div>
+    <h1>Research Roadmap</h1>
+    <p>A living map of discoveries. As we build, we learn what matters most. This roadmap captures the editable-in-size explorations that could unlock new insights about micromobility demand.</p>
+  </header>
+
+  <main class="roadmap-content">
+    <div class="progress-summary">
+      <div class="progress-card">
+        <div class="count" id="pendingCount">10</div>
+        <div class="label">Pending</div>
+      </div>
+      <div class="progress-card">
+        <div class="count" id="inProgressCount">0</div>
+        <div class="label">In Progress</div>
+      </div>
+      <div class="progress-card">
+        <div class="count" id="completedCount">0</div>
+        <div class="label">Completed</div>
+      </div>
+    </div>
+
+    <div class="roadmap-intro">
+      <p><strong>How this works:</strong> Each item here is scoped to be achievable in a focused iteration. As we build and explore, we'll discover what works, what doesn't, and what questions lead somewhere interesting.</p>
+      <p>This lab is about learning. Every completed item becomes evidence about how to forecast demand more accurately. Every dead-end becomes a lesson about what doesn't matter.</p>
+    </div>
+
+    <div class="roadmap-section">
+      <div class="roadmap-section-title">Events & Visibility</div>
+      <div class="roadmap-items">
+        <div class="roadmap-item">
+          <div class="roadmap-item-content">
+            <h3>Expand events viewer to include additional Excel sheets</h3>
+            <p>Currently showing only ChatGPT Forecast events. Extract and add Home Games, Weather data, and other event categories from the available Excel workbooks to give broader event coverage for demand analysis.</p>
+          </div>
+          <div class="roadmap-item-status">
+            <span class="status-badge pending">Pending</span>
+          </div>
+        </div>
+
+        <div class="roadmap-item">
+          <div class="roadmap-item-content">
+            <h3>Add date range picker to events viewer</h3>
+            <p>Allow users to filter events by date range to explore how events cluster during specific periods and identify peak activity windows.</p>
+          </div>
+          <div class="roadmap-item-status">
+            <span class="status-badge pending">Pending</span>
+          </div>
+        </div>
+
+        <div class="roadmap-item">
+          <div class="roadmap-item-content">
+            <h3>Integrate Claude Forecast events with ChatGPT events</h3>
+            <p>Extract events from Claude Forecast methodology workbook and display side-by-side or toggled view to show methodological differences in event identification and categorization.</p>
+          </div>
+          <div class="roadmap-item-status">
+            <span class="status-badge pending">Pending</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="roadmap-section">
+      <div class="roadmap-section-title">Data Visualization & Insight</div>
+      <div class="roadmap-items">
+        <div class="roadmap-item">
+          <div class="roadmap-item-content">
+            <h3>Build geographic demand heatmap overlay</h3>
+            <p>Create visual heatmap showing demand distribution across Columbus zones (Downtown, University District, Transit Hubs, Residential). Layer with event locations to see geographic event impact.</p>
+          </div>
+          <div class="roadmap-item-status">
+            <span class="status-badge pending">Pending</span>
+          </div>
+        </div>
+
+        <div class="roadmap-item">
+          <div class="roadmap-item-content">
+            <h3>Create weather data visualization dashboard</h3>
+            <p>Display historical weather patterns and their correlation with demand. Show temperature, precipitation, wind speed effects on bike/scooter usage.</p>
+          </div>
+          <div class="roadmap-item-status">
+            <span class="status-badge pending">Pending</span>
+          </div>
+        </div>
+
+        <div class="roadmap-item">
+          <div class="roadmap-item-content">
+            <h3>Add demand forecast comparison view</h3>
+            <p>Show predicted vs actual demand side-by-side. Track forecast accuracy over time. Help identify which day-types and conditions are hardest to predict.</p>
+          </div>
+          <div class="roadmap-item-status">
+            <span class="status-badge pending">Pending</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="roadmap-section">
+      <div class="roadmap-section-title">Operational Tools & Analytics</div>
+      <div class="roadmap-items">
+        <div class="roadmap-item">
+          <div class="roadmap-item-content">
+            <h3>Build operator performance tracking by vehicle model and zone</h3>
+            <p>Dashboard showing how different vehicle types (Spin vs Veo) and fleets perform in different geographic zones. Track utilization, availability, turnover rates.</p>
+          </div>
+          <div class="roadmap-item-status">
+            <span class="status-badge pending">Pending</span>
+          </div>
+        </div>
+
+        <div class="roadmap-item">
+          <div class="roadmap-item-content">
+            <h3>Create battery swap target calculator</h3>
+            <p>Tool to estimate daily battery maintenance needs based on predicted demand patterns. Help operators plan workforce allocation for recharging schedules.</p>
+          </div>
+          <div class="roadmap-item-status">
+            <span class="status-badge pending">Pending</span>
+          </div>
+        </div>
+
+        <div class="roadmap-item">
+          <div class="roadmap-item-content">
+            <h3>Build export and report generation for forecasts</h3>
+            <p>Allow users to export forecast predictions, event summaries, and analysis reports in PDF/CSV format for operational planning and stakeholder communication.</p>
+          </div>
+          <div class="roadmap-item-status">
+            <span class="status-badge pending">Pending</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="roadmap-section">
+      <div class="roadmap-section-title">Integration & Connections</div>
+      <div class="roadmap-items">
+        <div class="roadmap-item">
+          <div class="roadmap-item-content">
+            <h3>Connect case study insights to live data examples</h3>
+            <p>Link case study lessons (e.g., 'get baseline right', 'zone-specific truths') to interactive examples in forecast and events viewers showing real data evidence for each lesson.</p>
+          </div>
+          <div class="roadmap-item-status">
+            <span class="status-badge pending">Pending</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="roadmap-footer">
+    <p>© 2026 Steven Needham · Urban Transit Lab · Public data and open methodology</p>
+    <div style="margin-top: 1rem; display: flex; gap: 1.5rem; justify-content: center; font-family: var(--font-mono); font-size: var(--text-mono-sm);">
+      <a href="https://steveneedham.github.io/portfolio/" style="color: var(--amber); text-decoration: none;">Portfolio</a>
+      <a href="https://steveneedham.github.io/portfolio/ways-i-can-help.html" style="color: var(--amber); text-decoration: none;">Urban Strategies</a>
+      <a href="https://github.com/steveneedham/urban-transit-lab-predictor" style="color: var(--amber); text-decoration: none;">GitHub</a>
+    </div>
+  </footer>
+
+  <script>
+    // Update progress counts based on item status
+    function updateProgressCounts() {
+      const items = document.querySelectorAll('.roadmap-item');
+      let pending = 0, inProgress = 0, completed = 0;
+
+      items.forEach(item => {
+        if (item.classList.contains('completed')) completed++;
+        else if (item.classList.contains('in-progress')) inProgress++;
+        else pending++;
+      });
+
+      document.getElementById('pendingCount').textContent = pending;
+      document.getElementById('inProgressCount').textContent = inProgress;
+      document.getElementById('completedCount').textContent = completed;
+    }
+
+    document.addEventListener('DOMContentLoaded', updateProgressCounts);
+  </script>
+</body>
+</html>
