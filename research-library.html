@@ -275,6 +275,37 @@
     </section>
 
     <section class="library-section">
+      <div class="section-eyebrow">Events Database</div>
+      <h2>Canonical Events Viewer</h2>
+      <p class="library-intro">90 events from the ChatGPT Forecast model (2024–2026). Search by name, category, or area to see impact tier and dates.</p>
+
+      <div style="margin-bottom: 2rem;">
+        <input type="text" id="eventSearch" placeholder="Search events..." style="width: 100%; padding: 0.75rem; border: 2px solid var(--amber); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: var(--text-body);">
+      </div>
+
+      <div style="overflow-x: auto; border: 2px solid var(--amber); border-radius: var(--radius-sm);">
+        <table id="eventsTable" style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+          <thead style="background: var(--amber); color: var(--ink);">
+            <tr>
+              <th style="padding: 0.8rem; text-align: left; font-weight: 600;">Event ID</th>
+              <th style="padding: 0.8rem; text-align: left; font-weight: 600;">Event Name</th>
+              <th style="padding: 0.8rem; text-align: left; font-weight: 600;">Category</th>
+              <th style="padding: 0.8rem; text-align: left; font-weight: 600;">Area</th>
+              <th style="padding: 0.8rem; text-align: center; font-weight: 600;">Impact</th>
+              <th style="padding: 0.8rem; text-align: left; font-weight: 600;">Dates</th>
+            </tr>
+          </thead>
+          <tbody id="eventsBody">
+          </tbody>
+        </table>
+      </div>
+
+      <p style="margin-top: 1rem; color: var(--muted); font-size: var(--text-body-sm);">
+        <span id="eventCount">Loading...</span> events · Source: ChatGPT Forecast Excel workbook
+      </p>
+    </section>
+
+    <section class="library-section">
       <div class="section-eyebrow">About This Library</div>
       <h2>Methodology & Data Sources</h2>
       <p class="library-intro">These guides and charts represent two independent forecasting approaches applied to the same Columbus GBFS fleet data. Both use historical event catalogs, ISO-week correlations, and weather signals to project demand. The side-by-side comparison enables validation and cross-methodological review.</p>
@@ -285,5 +316,68 @@
   <footer class="library-footer">
     <p>© 2026 Steven Needham · Urban Transit Lab · Public data and open methodology</p>
   </footer>
+
+  <script>
+    // Load and display events data
+    async function loadEvents() {
+      try {
+        const response = await fetch('chatgpt_events.json');
+        const data = await response.json();
+
+        const tbody = document.getElementById('eventsBody');
+        const countSpan = document.getElementById('eventCount');
+        const searchInput = document.getElementById('eventSearch');
+
+        countSpan.textContent = `${data.count}`;
+
+        // Function to render events
+        function renderEvents(events) {
+          tbody.innerHTML = events.map((event, idx) => `
+            <tr style="border-bottom: 1px solid var(--panel-line); ${idx % 2 === 0 ? 'background: rgba(244, 165, 56, 0.02);' : ''}">
+              <td style="padding: 0.8rem; font-family: var(--font-mono); font-size: 0.85rem; color: var(--amber);">${event.event_id}</td>
+              <td style="padding: 0.8rem; font-weight: 500;">${event.event_name}</td>
+              <td style="padding: 0.8rem; color: var(--muted); font-size: 0.9rem;">${event.category}</td>
+              <td style="padding: 0.8rem; color: var(--muted); font-size: 0.9rem;">${event.area}</td>
+              <td style="padding: 0.8rem; text-align: center;">
+                <span style="display: inline-block; padding: 0.3rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 600; ${
+                  event.impact_tier === 'Very High' ? 'background: var(--amber); color: var(--ink);' :
+                  event.impact_tier === 'High' ? 'background: var(--teal); color: var(--ink);' :
+                  'background: var(--panel-line); color: var(--text);'
+                }">
+                  ${event.impact_tier}
+                </span>
+              </td>
+              <td style="padding: 0.8rem; font-size: 0.9rem; white-space: nowrap;">
+                ${event.start_date}${event.end_date !== event.start_date ? ` → ${event.end_date}` : ''}
+              </td>
+            </tr>
+          `).join('');
+        }
+
+        // Initial render
+        renderEvents(data.events);
+
+        // Search functionality
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          const filtered = data.events.filter(event =>
+            event.event_name.toLowerCase().includes(query) ||
+            event.category.toLowerCase().includes(query) ||
+            event.area.toLowerCase().includes(query) ||
+            event.event_id.toLowerCase().includes(query)
+          );
+          renderEvents(filtered);
+          countSpan.textContent = `${filtered.length}`;
+        });
+
+      } catch (error) {
+        console.error('Error loading events:', error);
+        document.getElementById('eventsBody').innerHTML = '<tr><td colspan="6" style="padding: 2rem; text-align: center; color: var(--muted);">Error loading events data</td></tr>';
+      }
+    }
+
+    // Load on page load
+    document.addEventListener('DOMContentLoaded', loadEvents);
+  </script>
 </body>
 </html>

@@ -1,0 +1,917 @@
+{
+  "source": "ChatGPT Forecast - Events Sheet",
+  "description": "Canonical events affecting Columbus micromobility demand",
+  "count": 90,
+  "headers": [
+    "event_id",
+    "event_name",
+    "start_date",
+    "end_date",
+    "category",
+    "venue",
+    "area",
+    "impact_tier"
+  ],
+  "events": [
+    {
+      "event_id": "2024-001",
+      "event_name": "Arnold Sports Festival",
+      "start_date": "2024-02-29",
+      "end_date": "2024-03-03",
+      "category": "Festival / sports",
+      "venue": "Greater Columbus Convention Center + Ohio Expo Center",
+      "area": "Downtown / Fairgrounds",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2024-002",
+      "event_name": "OhioHealth Capital City Half & Quarter Marathon",
+      "start_date": "2024-04-27",
+      "end_date": "2024-04-27",
+      "category": "Race / closure",
+      "venue": "Downtown Columbus course",
+      "area": "Downtown and adjacent neighborhoods",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2024-003",
+      "event_name": "COSI Science Festival",
+      "start_date": "2024-05-01",
+      "end_date": "2024-05-04",
+      "category": "Festival",
+      "venue": "COSI and regional sites",
+      "area": "Franklinton / Downtown",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2024-004",
+      "event_name": "Sonic Temple Art & Music Festival",
+      "start_date": "2024-05-16",
+      "end_date": "2024-05-19",
+      "category": "Music festival",
+      "venue": "Historic Crew Stadium",
+      "area": "Fairgrounds / University area",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2024-005",
+      "event_name": "Asian Festival",
+      "start_date": "2024-05-25",
+      "end_date": "2024-05-26",
+      "category": "Cultural festival",
+      "venue": "Franklin Park",
+      "area": "Near East Side",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2024-006",
+      "event_name": "Ohio Black Expo / Riverfront Culture Fest",
+      "start_date": "2024-05-25",
+      "end_date": "2024-05-26",
+      "category": "Cultural festival",
+      "venue": "Downtown riverfront",
+      "area": "Downtown",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2024-007",
+      "event_name": "Memorial Tournament",
+      "start_date": "2024-05-27",
+      "end_date": "2024-06-02",
+      "category": "Professional sports",
+      "venue": "Muirfield Village Golf Club",
+      "area": "Dublin",
+      "impact_tier": "Medium"
+    },
+    {
+      "event_id": "2024-008",
+      "event_name": "Breakaway Music Festival Ohio",
+      "start_date": "2024-05-31",
+      "end_date": "2024-06-01",
+      "category": "Music festival",
+      "venue": "Historic Crew Stadium",
+      "area": "Fairgrounds / University area",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2024-009",
+      "event_name": "Columbus Arts Festival",
+      "start_date": "2024-06-07",
+      "end_date": "2024-06-09",
+      "category": "Arts festival",
+      "venue": "Downtown riverfront",
+      "area": "Downtown",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2024-010",
+      "event_name": "Stonewall Columbus Pride Festival and March",
+      "start_date": "2024-06-14",
+      "end_date": "2024-06-15",
+      "category": "Festival / parade",
+      "venue": "Goodale Park and High Street",
+      "area": "Short North / Downtown",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2024-011",
+      "event_name": "Juneteenth Ohio Festival",
+      "start_date": "2024-06-15",
+      "end_date": "2024-06-16",
+      "category": "Cultural festival",
+      "venue": "Genoa Park",
+      "area": "Downtown",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2024-012",
+      "event_name": "Origins Game Fair",
+      "start_date": "2024-06-19",
+      "end_date": "2024-06-23",
+      "category": "Convention",
+      "venue": "Greater Columbus Convention Center",
+      "area": "Downtown / Short North",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2024-013",
+      "event_name": "Buckeye Country Superfest",
+      "start_date": "2024-06-22",
+      "end_date": "2024-06-23",
+      "category": "Stadium concert",
+      "venue": "Ohio Stadium",
+      "area": "University District",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2024-014",
+      "event_name": "ComFest",
+      "start_date": "2024-06-28",
+      "end_date": "2024-06-30",
+      "category": "Community festival",
+      "venue": "Goodale Park",
+      "area": "Short North / Victorian Village",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2024-015",
+      "event_name": "Red, White & BOOM!",
+      "start_date": "2024-07-03",
+      "end_date": "2024-07-03",
+      "category": "Festival / fireworks",
+      "venue": "Downtown Columbus",
+      "area": "Downtown",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2024-016",
+      "event_name": "Doo Dah Parade",
+      "start_date": "2024-07-04",
+      "end_date": "2024-07-04",
+      "category": "Parade / street event",
+      "venue": "Short North and Goodale Park",
+      "area": "Short North",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2024-017",
+      "event_name": "Columbus Book Festival",
+      "start_date": "2024-07-13",
+      "end_date": "2024-07-14",
+      "category": "Literary festival",
+      "venue": "Main Library and Topiary Park",
+      "area": "Discovery District",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2024-018",
+      "event_name": "Jazz & Rib Fest",
+      "start_date": "2024-07-19",
+      "end_date": "2024-07-21",
+      "category": "Music / food festival",
+      "venue": "Scioto Mile",
+      "area": "Downtown",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2024-019",
+      "event_name": "Ohio State Fair",
+      "start_date": "2024-07-24",
+      "end_date": "2024-08-04",
+      "category": "Fair",
+      "venue": "Ohio Expo Center",
+      "area": "Fairgrounds",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2024-020",
+      "event_name": "Pelotonia Ride Weekend",
+      "start_date": "2024-08-02",
+      "end_date": "2024-08-04",
+      "category": "Cycling / fundraiser",
+      "venue": "Central Ohio routes and Downtown opening",
+      "area": "Downtown / regional",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2024-021",
+      "event_name": "Festival Latino",
+      "start_date": "2024-08-10",
+      "end_date": "2024-08-11",
+      "category": "Cultural festival",
+      "venue": "Genoa Park",
+      "area": "Downtown",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2024-022",
+      "event_name": "CBUS Soul Fest",
+      "start_date": "2024-08-17",
+      "end_date": "2024-08-17",
+      "category": "Cultural festival",
+      "venue": "Bicentennial Park",
+      "area": "Downtown",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2024-023",
+      "event_name": "Matsuricon",
+      "start_date": "2024-08-30",
+      "end_date": "2024-09-01",
+      "category": "Convention",
+      "venue": "Greater Columbus Convention Center / Hyatt",
+      "area": "Downtown / Short North",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2024-024",
+      "event_name": "Columbus Oktoberfest",
+      "start_date": "2024-09-06",
+      "end_date": "2024-09-08",
+      "category": "Cultural festival",
+      "venue": "Ohio Expo Center",
+      "area": "Fairgrounds",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2024-025",
+      "event_name": "All American Quarter Horse Congress",
+      "start_date": "2024-09-29",
+      "end_date": "2024-10-27",
+      "category": "Equestrian / trade show",
+      "venue": "Ohio Expo Center",
+      "area": "Fairgrounds",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2024-026",
+      "event_name": "Nationwide Children\u2019s Hospital Columbus Marathon",
+      "start_date": "2024-10-20",
+      "end_date": "2024-10-20",
+      "category": "Race / closure",
+      "venue": "Citywide course",
+      "area": "Downtown and neighborhoods",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2024-027",
+      "event_name": "GalaxyCon Columbus",
+      "start_date": "2024-12-06",
+      "end_date": "2024-12-08",
+      "category": "Convention",
+      "venue": "Greater Columbus Convention Center",
+      "area": "Downtown / Short North",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2025-001",
+      "event_name": "Arnold Sports Festival",
+      "start_date": "2025-02-27",
+      "end_date": "2025-03-02",
+      "category": "Festival / sports",
+      "venue": "Greater Columbus Convention Center + Ohio Expo Center",
+      "area": "Downtown / Fairgrounds",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2025-002",
+      "event_name": "NHL Stadium Series: Blue Jackets vs. Red Wings",
+      "start_date": "2025-03-01",
+      "end_date": "2025-03-01",
+      "category": "Special sporting event",
+      "venue": "Ohio Stadium",
+      "area": "University District",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2025-003",
+      "event_name": "OhioHealth Capital City Half & Quarter Marathon",
+      "start_date": "2025-04-26",
+      "end_date": "2025-04-26",
+      "category": "Race / closure",
+      "venue": "Downtown Columbus course",
+      "area": "Downtown and adjacent neighborhoods",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2025-004",
+      "event_name": "COSI Science Festival",
+      "start_date": "2025-04-30",
+      "end_date": "2025-05-03",
+      "category": "Festival",
+      "venue": "COSI and regional sites",
+      "area": "Franklinton / Downtown",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2025-005",
+      "event_name": "Sonic Temple Art & Music Festival",
+      "start_date": "2025-05-08",
+      "end_date": "2025-05-11",
+      "category": "Music festival",
+      "venue": "Historic Crew Stadium",
+      "area": "Fairgrounds / University area",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2025-006",
+      "event_name": "Asian Festival",
+      "start_date": "2025-05-24",
+      "end_date": "2025-05-25",
+      "category": "Cultural festival",
+      "venue": "Franklin Park",
+      "area": "Near East Side",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2025-007",
+      "event_name": "Ohio Black Expo / Riverfront Culture Fest",
+      "start_date": "2025-05-24",
+      "end_date": "2025-05-25",
+      "category": "Cultural festival",
+      "venue": "Genoa Park",
+      "area": "Downtown",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2025-008",
+      "event_name": "Breakaway Music Festival Ohio",
+      "start_date": "2025-05-30",
+      "end_date": "2025-05-31",
+      "category": "Music festival",
+      "venue": "Historic Crew Stadium",
+      "area": "Fairgrounds / University area",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2025-009",
+      "event_name": "Columbus Arts Festival",
+      "start_date": "2025-06-06",
+      "end_date": "2025-06-08",
+      "category": "Arts festival",
+      "venue": "Downtown riverfront",
+      "area": "Downtown",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2025-010",
+      "event_name": "Stonewall Columbus Pride Festival and March",
+      "start_date": "2025-06-13",
+      "end_date": "2025-06-14",
+      "category": "Festival / parade",
+      "venue": "Goodale Park and High Street",
+      "area": "Short North / Downtown",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2025-011",
+      "event_name": "Origins Game Fair",
+      "start_date": "2025-06-18",
+      "end_date": "2025-06-22",
+      "category": "Convention",
+      "venue": "Greater Columbus Convention Center",
+      "area": "Downtown / Short North",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2025-012",
+      "event_name": "Buckeye Country Superfest",
+      "start_date": "2025-06-21",
+      "end_date": "2025-06-21",
+      "category": "Stadium concert",
+      "venue": "Ohio Stadium",
+      "area": "University District",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2025-013",
+      "event_name": "Juneteenth Ohio Festival",
+      "start_date": "2025-06-21",
+      "end_date": "2025-06-22",
+      "category": "Cultural festival",
+      "venue": "Genoa Park",
+      "area": "Downtown",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2025-014",
+      "event_name": "ComFest",
+      "start_date": "2025-06-27",
+      "end_date": "2025-06-29",
+      "category": "Community festival",
+      "venue": "Goodale Park",
+      "area": "Short North / Victorian Village",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2025-015",
+      "event_name": "Red, White & BOOM!",
+      "start_date": "2025-07-03",
+      "end_date": "2025-07-03",
+      "category": "Festival / fireworks",
+      "venue": "Downtown Columbus",
+      "area": "Downtown",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2025-016",
+      "event_name": "Doo Dah Parade",
+      "start_date": "2025-07-04",
+      "end_date": "2025-07-04",
+      "category": "Parade / street event",
+      "venue": "Short North and Goodale Park",
+      "area": "Short North",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2025-017",
+      "event_name": "Columbus Book Festival",
+      "start_date": "2025-07-12",
+      "end_date": "2025-07-13",
+      "category": "Literary festival",
+      "venue": "Main Library and Topiary Park",
+      "area": "Discovery District",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2025-018",
+      "event_name": "Jazz & Rib Fest",
+      "start_date": "2025-07-18",
+      "end_date": "2025-07-20",
+      "category": "Music / food festival",
+      "venue": "Scioto Mile",
+      "area": "Downtown",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2025-019",
+      "event_name": "Ohio State Fair",
+      "start_date": "2025-07-23",
+      "end_date": "2025-08-03",
+      "category": "Fair",
+      "venue": "Ohio Expo Center",
+      "area": "Fairgrounds",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2025-020",
+      "event_name": "Pelotonia Ride Weekend",
+      "start_date": "2025-08-01",
+      "end_date": "2025-08-03",
+      "category": "Cycling / fundraiser",
+      "venue": "Central Ohio routes and Downtown opening",
+      "area": "Downtown / regional",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2025-021",
+      "event_name": "Festival Latino",
+      "start_date": "2025-08-09",
+      "end_date": "2025-08-10",
+      "category": "Cultural festival",
+      "venue": "Genoa Park",
+      "area": "Downtown",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2025-022",
+      "event_name": "CBUS Soul Fest",
+      "start_date": "2025-08-15",
+      "end_date": "2025-08-16",
+      "category": "Cultural festival",
+      "venue": "Bicentennial Park",
+      "area": "Downtown",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2025-023",
+      "event_name": "Matsuricon",
+      "start_date": "2025-08-28",
+      "end_date": "2025-08-31",
+      "category": "Convention",
+      "venue": "Greater Columbus Convention Center / Hyatt",
+      "area": "Downtown / Short North",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2025-024",
+      "event_name": "Columbus Oktoberfest",
+      "start_date": "2025-09-05",
+      "end_date": "2025-09-07",
+      "category": "Cultural festival",
+      "venue": "Ohio Expo Center",
+      "area": "Fairgrounds",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2025-025",
+      "event_name": "All American Quarter Horse Congress",
+      "start_date": "2025-09-27",
+      "end_date": "2025-10-26",
+      "category": "Equestrian / trade show",
+      "venue": "Ohio Expo Center",
+      "area": "Fairgrounds",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2025-026",
+      "event_name": "Nationwide Children\u2019s Hospital Columbus Marathon",
+      "start_date": "2025-10-19",
+      "end_date": "2025-10-19",
+      "category": "Race / closure",
+      "venue": "Citywide course",
+      "area": "Downtown and neighborhoods",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2025-027",
+      "event_name": "GalaxyCon Columbus",
+      "start_date": "2025-12-05",
+      "end_date": "2025-12-07",
+      "category": "Convention",
+      "venue": "Greater Columbus Convention Center",
+      "area": "Downtown / Short North",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2026-001",
+      "event_name": "Arnold Sports Festival",
+      "start_date": "2026-03-05",
+      "end_date": "2026-03-08",
+      "category": "Festival / sports",
+      "venue": "Greater Columbus Convention Center + Ohio Expo Center",
+      "area": "Downtown / Fairgrounds",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2026-002",
+      "event_name": "Greater Columbus Cherry Blossom Festival",
+      "start_date": "2026-03-25",
+      "end_date": "2026-04-25",
+      "category": "Seasonal festival",
+      "venue": "Franklin Park",
+      "area": "Near East Side",
+      "impact_tier": "Medium"
+    },
+    {
+      "event_id": "2026-003",
+      "event_name": "Equine Affaire",
+      "start_date": "2026-04-09",
+      "end_date": "2026-04-12",
+      "category": "Equestrian / trade show",
+      "venue": "Ohio Expo Center",
+      "area": "Fairgrounds",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2026-004",
+      "event_name": "AIDS Walk Ohio",
+      "start_date": "2026-04-18",
+      "end_date": "2026-04-18",
+      "category": "Walk / fundraiser",
+      "venue": "Genoa Park",
+      "area": "Downtown",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2026-005",
+      "event_name": "OhioHealth Capital City Half & Quarter Marathon",
+      "start_date": "2026-04-25",
+      "end_date": "2026-04-25",
+      "category": "Race / closure",
+      "venue": "Downtown Columbus course",
+      "area": "Downtown and adjacent neighborhoods",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2026-006",
+      "event_name": "COSI Science Festival",
+      "start_date": "2026-04-29",
+      "end_date": "2026-05-02",
+      "category": "Festival",
+      "venue": "COSI and regional sites",
+      "area": "Franklinton / Downtown",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2026-007",
+      "event_name": "Hops on High",
+      "start_date": "2026-05-09",
+      "end_date": "2026-05-09",
+      "category": "Street festival",
+      "venue": "High Street",
+      "area": "Short North",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2026-008",
+      "event_name": "Sonic Temple Art & Music Festival",
+      "start_date": "2026-05-14",
+      "end_date": "2026-05-17",
+      "category": "Music festival",
+      "venue": "Historic Crew Stadium",
+      "area": "Fairgrounds / University area",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2026-009",
+      "event_name": "Bruno Mars at Ohio Stadium",
+      "start_date": "2026-05-16",
+      "end_date": "2026-05-16",
+      "category": "Stadium concert",
+      "venue": "Ohio Stadium",
+      "area": "University District",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2026-010",
+      "event_name": "Asian Festival",
+      "start_date": "2026-05-23",
+      "end_date": "2026-05-24",
+      "category": "Cultural festival",
+      "venue": "Franklin Park",
+      "area": "Near East Side",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2026-011",
+      "event_name": "Ohio Black Expo / Riverfront Culture Fest",
+      "start_date": "2026-05-23",
+      "end_date": "2026-05-24",
+      "category": "Cultural festival",
+      "venue": "Downtown Columbus",
+      "area": "Downtown",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2026-012",
+      "event_name": "Memorial Tournament",
+      "start_date": "2026-06-01",
+      "end_date": "2026-06-07",
+      "category": "Professional sports",
+      "venue": "Muirfield Village Golf Club",
+      "area": "Dublin",
+      "impact_tier": "Medium"
+    },
+    {
+      "event_id": "2026-013",
+      "event_name": "Columbus Summer Wine Festival",
+      "start_date": "2026-06-06",
+      "end_date": "2026-06-06",
+      "category": "Food / drink festival",
+      "venue": "McFerson Commons",
+      "area": "Arena District",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2026-014",
+      "event_name": "Animate! Columbus",
+      "start_date": "2026-06-12",
+      "end_date": "2026-06-14",
+      "category": "Convention",
+      "venue": "Greater Columbus Convention Center",
+      "area": "Downtown / Short North",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2026-015",
+      "event_name": "Columbus Arts Festival",
+      "start_date": "2026-06-12",
+      "end_date": "2026-06-14",
+      "category": "Arts festival",
+      "venue": "Downtown Columbus",
+      "area": "Downtown",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2026-016",
+      "event_name": "Buckeye Country Superfest",
+      "start_date": "2026-06-13",
+      "end_date": "2026-06-13",
+      "category": "Stadium concert",
+      "venue": "Ohio Stadium",
+      "area": "University District",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2026-017",
+      "event_name": "Origins Game Fair",
+      "start_date": "2026-06-17",
+      "end_date": "2026-06-21",
+      "category": "Convention",
+      "venue": "Greater Columbus Convention Center",
+      "area": "Downtown / Short North",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2026-018",
+      "event_name": "Juneteenth Ohio Celebration",
+      "start_date": "2026-06-19",
+      "end_date": "2026-06-20",
+      "category": "Cultural festival",
+      "venue": "Genoa Park",
+      "area": "Downtown",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2026-019",
+      "event_name": "Stonewall Columbus Pride Festival and March",
+      "start_date": "2026-06-19",
+      "end_date": "2026-06-20",
+      "category": "Festival / parade",
+      "venue": "Goodale Park and High Street",
+      "area": "Short North / Downtown",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2026-020",
+      "event_name": "Columbus Air Show",
+      "start_date": "2026-06-19",
+      "end_date": "2026-06-21",
+      "category": "Air show",
+      "venue": "Rickenbacker International Airport",
+      "area": "South Columbus",
+      "impact_tier": "Medium"
+    },
+    {
+      "event_id": "2026-021",
+      "event_name": "ComFest",
+      "start_date": "2026-06-26",
+      "end_date": "2026-06-28",
+      "category": "Community festival",
+      "venue": "Goodale Park",
+      "area": "Short North / Victorian Village",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2026-022",
+      "event_name": "Red, White & BOOM!",
+      "start_date": "2026-07-03",
+      "end_date": "2026-07-03",
+      "category": "Festival / fireworks",
+      "venue": "Downtown Columbus",
+      "area": "Downtown",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2026-023",
+      "event_name": "Doo Dah Parade",
+      "start_date": "2026-07-04",
+      "end_date": "2026-07-04",
+      "category": "Parade / street event",
+      "venue": "Short North and Goodale Park",
+      "area": "Short North",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2026-024",
+      "event_name": "Columbus Book Festival",
+      "start_date": "2026-07-11",
+      "end_date": "2026-07-12",
+      "category": "Literary festival",
+      "venue": "Main Library and Topiary Park",
+      "area": "Discovery District",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2026-025",
+      "event_name": "Columbus Crew vs. New York City FC",
+      "start_date": "2026-07-22",
+      "end_date": "2026-07-22",
+      "category": "Professional sports",
+      "venue": "ScottsMiracle-Gro Field",
+      "area": "Arena District",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2026-026",
+      "event_name": "Jazz & Rib Fest",
+      "start_date": "2026-07-24",
+      "end_date": "2026-07-26",
+      "category": "Music / food festival",
+      "venue": "Scioto Mile",
+      "area": "Downtown",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2026-027",
+      "event_name": "Columbus Crew vs. FC Cincinnati",
+      "start_date": "2026-07-25",
+      "end_date": "2026-07-25",
+      "category": "Rivalry sporting event",
+      "venue": "ScottsMiracle-Gro Field",
+      "area": "Arena District",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2026-028",
+      "event_name": "Ohio State Fair",
+      "start_date": "2026-07-29",
+      "end_date": "2026-08-09",
+      "category": "Fair",
+      "venue": "Ohio Expo Center",
+      "area": "Fairgrounds",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2026-029",
+      "event_name": "Pelotonia Opening Ceremony and Ride Weekend",
+      "start_date": "2026-07-31",
+      "end_date": "2026-08-02",
+      "category": "Cycling / fundraiser",
+      "venue": "Downtown Columbus and Central Ohio routes",
+      "area": "Downtown / regional",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2026-030",
+      "event_name": "Festival Latino",
+      "start_date": "2026-08-22",
+      "end_date": "2026-08-23",
+      "category": "Cultural festival",
+      "venue": "Columbus Commons and Ohio Theatre",
+      "area": "Downtown",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2026-031",
+      "event_name": "CBUS Soul Fest",
+      "start_date": "2026-09-04",
+      "end_date": "2026-09-05",
+      "category": "Cultural festival",
+      "venue": "Bicentennial Park",
+      "area": "Downtown",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2026-032",
+      "event_name": "Matsuricon",
+      "start_date": "2026-09-04",
+      "end_date": "2026-09-06",
+      "category": "Convention",
+      "venue": "Greater Columbus Convention Center",
+      "area": "Downtown / Short North",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2026-033",
+      "event_name": "Columbus Oktoberfest",
+      "start_date": "2026-09-11",
+      "end_date": "2026-09-13",
+      "category": "Cultural festival",
+      "venue": "Ohio Expo Center",
+      "area": "Fairgrounds",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "2026-034",
+      "event_name": "All American Quarter Horse Congress",
+      "start_date": "2026-09-26",
+      "end_date": "2026-10-24",
+      "category": "Equestrian / trade show",
+      "venue": "Ohio Expo Center",
+      "area": "Fairgrounds",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2026-035",
+      "event_name": "Nationwide Children\u2019s Hospital Columbus Marathon Weekend",
+      "start_date": "2026-10-17",
+      "end_date": "2026-10-18",
+      "category": "Race / closure",
+      "venue": "Citywide course",
+      "area": "Downtown and neighborhoods",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "2026-036",
+      "event_name": "GalaxyCon Columbus",
+      "start_date": "2026-12-04",
+      "end_date": "2026-12-06",
+      "category": "Convention",
+      "venue": "Greater Columbus Convention Center",
+      "area": "Downtown / Short North",
+      "impact_tier": "Very High"
+    }
+  ]
+}
