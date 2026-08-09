@@ -1,0 +1,447 @@
+{
+  "source": "Claude Forecast - Events Sheet",
+  "description": "Supplementary events identified through Claude analysis of Columbus demand patterns",
+  "count": 45,
+  "headers": [
+    "event_id",
+    "event_name",
+    "start_date",
+    "end_date",
+    "category",
+    "venue",
+    "area",
+    "impact_tier"
+  ],
+  "events": [
+    {
+      "event_id": "C2024-001",
+      "event_name": "Columbus State University Spring Semester Begins",
+      "start_date": "2024-01-08",
+      "end_date": "2024-05-10",
+      "category": "Academic calendar",
+      "venue": "Columbus State University campus",
+      "area": "University District",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "C2024-002",
+      "event_name": "Ohio State University Spring Semester Begins",
+      "start_date": "2024-01-08",
+      "end_date": "2024-05-10",
+      "category": "Academic calendar",
+      "venue": "Ohio State University campus",
+      "area": "University District",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "C2024-003",
+      "event_name": "First Day of Spring Commute Pattern Change",
+      "start_date": "2024-03-20",
+      "end_date": "2024-03-20",
+      "category": "Seasonal pattern",
+      "venue": "Citywide",
+      "area": "All zones",
+      "impact_tier": "Medium"
+    },
+    {
+      "event_id": "C2024-004",
+      "event_name": "Cherry Blossom Festival Weekend",
+      "start_date": "2024-04-13",
+      "end_date": "2024-04-14",
+      "category": "Festival",
+      "venue": "Genoa Park and surrounding areas",
+      "area": "Downtown / Genoa Park",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "C2024-005",
+      "event_name": "Memorial Day - Fleet Peak Day",
+      "start_date": "2024-05-27",
+      "end_date": "2024-05-27",
+      "category": "Holiday",
+      "venue": "Citywide",
+      "area": "All zones",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "C2024-006",
+      "event_name": "Summer School Begins (OSU/CSU)",
+      "start_date": "2024-06-03",
+      "end_date": "2024-08-09",
+      "category": "Academic calendar",
+      "venue": "University campuses",
+      "area": "University District",
+      "impact_tier": "Medium"
+    },
+    {
+      "event_id": "C2024-007",
+      "event_name": "First Day of Summer Demand Peak",
+      "start_date": "2024-06-21",
+      "end_date": "2024-08-31",
+      "category": "Seasonal pattern",
+      "venue": "Citywide",
+      "area": "All zones",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "C2024-008",
+      "event_name": "Independence Day Holiday - Extended Weekend",
+      "start_date": "2024-07-01",
+      "end_date": "2024-07-07",
+      "category": "Holiday",
+      "venue": "Citywide parks and downtown",
+      "area": "Downtown Core / All zones",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "C2024-009",
+      "event_name": "Summer Street Festivals - Weekly Series",
+      "start_date": "2024-06-01",
+      "end_date": "2024-08-31",
+      "category": "Festival / weekly event",
+      "venue": "Various downtown venues",
+      "area": "Downtown Core / Franklinton",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "C2024-010",
+      "event_name": "Ohio State University Fall Semester Begins",
+      "start_date": "2024-08-26",
+      "end_date": "2024-12-13",
+      "category": "Academic calendar",
+      "venue": "Ohio State University campus",
+      "area": "University District",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "C2024-011",
+      "event_name": "Columbus State University Fall Semester Begins",
+      "start_date": "2024-08-26",
+      "end_date": "2024-12-13",
+      "category": "Academic calendar",
+      "venue": "Columbus State University campus",
+      "area": "University District",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "C2024-012",
+      "event_name": "First Day of Fall - Commute Pattern Shift",
+      "start_date": "2024-09-23",
+      "end_date": "2024-09-23",
+      "category": "Seasonal pattern",
+      "venue": "Citywide",
+      "area": "All zones",
+      "impact_tier": "Medium"
+    },
+    {
+      "event_id": "C2024-013",
+      "event_name": "Labor Day Holiday - Extended Weekend",
+      "start_date": "2024-09-01",
+      "end_date": "2024-09-02",
+      "category": "Holiday",
+      "venue": "Citywide",
+      "area": "All zones",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "C2024-014",
+      "event_name": "Columbus Day Holiday",
+      "start_date": "2024-10-14",
+      "end_date": "2024-10-14",
+      "category": "Holiday",
+      "venue": "Citywide",
+      "area": "All zones",
+      "impact_tier": "Medium"
+    },
+    {
+      "event_id": "C2024-015",
+      "event_name": "Halloween Weekend - Demand Peak",
+      "start_date": "2024-10-26",
+      "end_date": "2024-10-31",
+      "category": "Holiday / nightlife",
+      "venue": "Downtown / Short North",
+      "area": "Downtown Core",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "C2024-016",
+      "event_name": "Thanksgiving Holiday - Extended Period",
+      "start_date": "2024-11-25",
+      "end_date": "2024-12-01",
+      "category": "Holiday",
+      "venue": "Citywide",
+      "area": "All zones",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "C2024-017",
+      "event_name": "Black Friday / Cyber Monday Shopping Events",
+      "start_date": "2024-11-29",
+      "end_date": "2024-12-02",
+      "category": "Commercial",
+      "venue": "Shopping districts and malls",
+      "area": "Downtown / Shopping centers",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "C2024-018",
+      "event_name": "Winter Holiday Season Begins",
+      "start_date": "2024-11-01",
+      "end_date": "2024-12-31",
+      "category": "Seasonal pattern",
+      "venue": "Citywide",
+      "area": "All zones",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "C2024-019",
+      "event_name": "New Year's Eve / Day - Extended Holiday",
+      "start_date": "2024-12-31",
+      "end_date": "2025-01-01",
+      "category": "Holiday",
+      "venue": "Downtown nightlife district",
+      "area": "Downtown Core",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "C2025-001",
+      "event_name": "First Day of Winter - Demand Trough",
+      "start_date": "2024-12-21",
+      "end_date": "2025-02-28",
+      "category": "Seasonal pattern",
+      "venue": "Citywide",
+      "area": "All zones",
+      "impact_tier": "Medium"
+    },
+    {
+      "event_id": "C2025-002",
+      "event_name": "Martin Luther King Jr. Day",
+      "start_date": "2025-01-20",
+      "end_date": "2025-01-20",
+      "category": "Holiday",
+      "venue": "Citywide",
+      "area": "All zones",
+      "impact_tier": "Medium"
+    },
+    {
+      "event_id": "C2025-003",
+      "event_name": "Presidents' Day Holiday",
+      "start_date": "2025-02-17",
+      "end_date": "2025-02-17",
+      "category": "Holiday",
+      "venue": "Citywide",
+      "area": "All zones",
+      "impact_tier": "Medium"
+    },
+    {
+      "event_id": "C2025-004",
+      "event_name": "Valentine's Day - Downtown Peak",
+      "start_date": "2025-02-14",
+      "end_date": "2025-02-14",
+      "category": "Holiday / dining",
+      "venue": "Downtown restaurants and bars",
+      "area": "Downtown Core",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "C2025-005",
+      "event_name": "St. Patrick's Day Celebration",
+      "start_date": "2025-03-17",
+      "end_date": "2025-03-17",
+      "category": "Holiday / nightlife",
+      "venue": "Downtown / Short North",
+      "area": "Downtown Core",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "C2025-006",
+      "event_name": "Spring Break (OSU/CSU)",
+      "start_date": "2025-03-10",
+      "end_date": "2025-03-16",
+      "category": "Academic calendar",
+      "venue": "University districts",
+      "area": "University District",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "C2025-007",
+      "event_name": "Columbus State University Spring Semester Begins",
+      "start_date": "2025-01-13",
+      "end_date": "2025-05-09",
+      "category": "Academic calendar",
+      "venue": "Columbus State University campus",
+      "area": "University District",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "C2025-008",
+      "event_name": "Ohio State University Spring Semester Begins",
+      "start_date": "2025-01-06",
+      "end_date": "2025-05-09",
+      "category": "Academic calendar",
+      "venue": "Ohio State University campus",
+      "area": "University District",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "C2025-009",
+      "event_name": "Spring Break Weather Impact Window",
+      "start_date": "2025-03-10",
+      "end_date": "2025-03-23",
+      "category": "Weather risk",
+      "venue": "Citywide",
+      "area": "All zones",
+      "impact_tier": "Medium"
+    },
+    {
+      "event_id": "C2025-010",
+      "event_name": "Earth Day Festival Planning Period",
+      "start_date": "2025-04-01",
+      "end_date": "2025-04-30",
+      "category": "Festival prep",
+      "venue": "Various locations",
+      "area": "All zones",
+      "impact_tier": "Medium"
+    },
+    {
+      "event_id": "C2025-011",
+      "event_name": "Memorial Day Holiday - Peak Day",
+      "start_date": "2025-05-26",
+      "end_date": "2025-05-26",
+      "category": "Holiday",
+      "venue": "Citywide parks",
+      "area": "All zones",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "C2025-012",
+      "event_name": "Summer School Season Begins",
+      "start_date": "2025-06-02",
+      "end_date": "2025-08-08",
+      "category": "Academic calendar",
+      "venue": "University campuses",
+      "area": "University District",
+      "impact_tier": "Medium"
+    },
+    {
+      "event_id": "C2025-013",
+      "event_name": "First Day of Summer Peak Demand",
+      "start_date": "2025-06-21",
+      "end_date": "2025-08-31",
+      "category": "Seasonal pattern",
+      "venue": "Citywide",
+      "area": "All zones",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "C2025-014",
+      "event_name": "Independence Day Extended Holiday",
+      "start_date": "2025-07-01",
+      "end_date": "2025-07-07",
+      "category": "Holiday",
+      "venue": "Citywide parks and downtown",
+      "area": "Downtown Core / All zones",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "C2025-015",
+      "event_name": "Mid-Summer Music Festival Series",
+      "start_date": "2025-07-15",
+      "end_date": "2025-08-15",
+      "category": "Festival / entertainment",
+      "venue": "Various downtown venues",
+      "area": "Downtown Core",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "C2025-016",
+      "event_name": "Back to School - OSU/CSU Fall Begins",
+      "start_date": "2025-08-25",
+      "end_date": "2025-12-12",
+      "category": "Academic calendar",
+      "venue": "University campuses",
+      "area": "University District",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "C2025-017",
+      "event_name": "Labor Day Holiday",
+      "start_date": "2025-09-01",
+      "end_date": "2025-09-01",
+      "category": "Holiday",
+      "venue": "Citywide",
+      "area": "All zones",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "C2025-018",
+      "event_name": "Fall Equinox - Commute Pattern Shift",
+      "start_date": "2025-09-22",
+      "end_date": "2025-09-22",
+      "category": "Seasonal pattern",
+      "venue": "Citywide",
+      "area": "All zones",
+      "impact_tier": "Medium"
+    },
+    {
+      "event_id": "C2025-019",
+      "event_name": "Columbus Day Holiday",
+      "start_date": "2025-10-13",
+      "end_date": "2025-10-13",
+      "category": "Holiday",
+      "venue": "Citywide",
+      "area": "All zones",
+      "impact_tier": "Medium"
+    },
+    {
+      "event_id": "C2025-020",
+      "event_name": "Halloween Weekend Peak",
+      "start_date": "2025-10-25",
+      "end_date": "2025-10-31",
+      "category": "Holiday / nightlife",
+      "venue": "Downtown / Short North",
+      "area": "Downtown Core",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "C2025-021",
+      "event_name": "Thanksgiving Holiday Period",
+      "start_date": "2025-11-24",
+      "end_date": "2025-11-30",
+      "category": "Holiday",
+      "venue": "Citywide",
+      "area": "All zones",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "C2025-022",
+      "event_name": "Holiday Shopping Season - Black Friday",
+      "start_date": "2025-11-28",
+      "end_date": "2025-12-01",
+      "category": "Commercial",
+      "venue": "Shopping districts",
+      "area": "Downtown / Retail zones",
+      "impact_tier": "High"
+    },
+    {
+      "event_id": "C2025-023",
+      "event_name": "Winter Holiday Season Peak",
+      "start_date": "2025-11-01",
+      "end_date": "2025-12-31",
+      "category": "Seasonal pattern",
+      "venue": "Citywide",
+      "area": "All zones",
+      "impact_tier": "Very High"
+    },
+    {
+      "event_id": "C2025-024",
+      "event_name": "New Year's Eve / Day Holiday",
+      "start_date": "2025-12-31",
+      "end_date": "2026-01-01",
+      "category": "Holiday",
+      "venue": "Downtown nightlife",
+      "area": "Downtown Core",
+      "impact_tier": "Very High"
+    }
+  ]
+}

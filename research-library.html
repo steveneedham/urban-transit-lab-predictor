@@ -292,22 +292,28 @@
 
     <section class="library-section">
       <div class="section-eyebrow">Events Database</div>
-      <h2>Canonical Events Viewer</h2>
-      <p class="library-intro">90 events from the ChatGPT Forecast model (2024–2026). Search by name, category, or area to see impact tier and dates.</p>
+      <h2>Integrated Events Viewer</h2>
+      <p class="library-intro">135 events from ChatGPT Forecast (90) and Claude Forecast (45) models (2024–2026). Search by name, category, or area to see impact tier and dates.</p>
 
-      <div style="margin-bottom: 2rem;">
+      <div style="margin-bottom: 1.5rem; display: grid; grid-template-columns: 1fr auto; gap: 1.5rem; align-items: center;">
         <input type="text" id="eventSearch" placeholder="Search events..." style="width: 100%; padding: 0.75rem; border: 2px solid var(--amber); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: var(--text-body);">
+        <select id="sourceFilter" style="padding: 0.75rem; border: 2px solid var(--amber); border-radius: var(--radius-sm); background: var(--ink); color: var(--text); font-family: var(--font-body); font-size: var(--text-body); cursor: pointer;">
+          <option value="all">All Sources</option>
+          <option value="ChatGPT">ChatGPT Forecast</option>
+          <option value="Claude">Claude Forecast</option>
+        </select>
       </div>
 
       <div style="overflow-x: auto; border: 2px solid var(--amber); border-radius: var(--radius-sm);">
         <table id="eventsTable" style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
           <thead style="background: var(--amber); color: var(--ink);">
             <tr>
-              <th style="padding: 0.8rem; text-align: left; font-weight: 600;">Event ID</th>
+              <th style="padding: 0.8rem; text-align: left; font-weight: 600;">ID</th>
               <th style="padding: 0.8rem; text-align: left; font-weight: 600;">Event Name</th>
               <th style="padding: 0.8rem; text-align: left; font-weight: 600;">Category</th>
               <th style="padding: 0.8rem; text-align: left; font-weight: 600;">Area</th>
               <th style="padding: 0.8rem; text-align: center; font-weight: 600;">Impact</th>
+              <th style="padding: 0.8rem; text-align: center; font-weight: 600;">Source</th>
               <th style="padding: 0.8rem; text-align: left; font-weight: 600;">Dates</th>
             </tr>
           </thead>
@@ -317,7 +323,7 @@
       </div>
 
       <p style="margin-top: 1rem; color: var(--muted); font-size: var(--text-body-sm);">
-        <span id="eventCount">Loading...</span> events · Source: ChatGPT Forecast Excel workbook
+        <span id="eventCount">Loading...</span> events · <span id="sourceLabel">All sources</span>
       </p>
     </section>
 
@@ -338,17 +344,27 @@
   </footer>
 
   <script>
-    // Load and display events data
+    // Load and display integrated events data
     async function loadEvents() {
       try {
-        const response = await fetch('chatgpt_events.json');
-        const data = await response.json();
+        const [chatgptResponse, claudeResponse] = await Promise.all([
+          fetch('chatgpt_events.json'),
+          fetch('claude_events.json')
+        ]);
+
+        const chatgptData = await chatgptResponse.json();
+        const claudeData = await claudeResponse.json();
+
+        // Add source to each event
+        const chatgptEvents = chatgptData.events.map(e => ({ ...e, source: 'ChatGPT' }));
+        const claudeEvents = claudeData.events.map(e => ({ ...e, source: 'Claude' }));
+        const allEvents = [...chatgptEvents, ...claudeEvents];
 
         const tbody = document.getElementById('eventsBody');
         const countSpan = document.getElementById('eventCount');
+        const sourceLabel = document.getElementById('sourceLabel');
         const searchInput = document.getElementById('eventSearch');
-
-        countSpan.textContent = `${data.count}`;
+        const sourceFilter = document.getElementById('sourceFilter');
 
         // Function to render events
         function renderEvents(events) {
@@ -367,6 +383,9 @@
                   ${event.impact_tier}
                 </span>
               </td>
+              <td style="padding: 0.8rem; text-align: center; font-size: 0.85rem; font-family: var(--font-mono); color: var(--muted);">
+                ${event.source}
+              </td>
               <td style="padding: 0.8rem; font-size: 0.9rem; white-space: nowrap;">
                 ${event.start_date}${event.end_date !== event.start_date ? ` → ${event.end_date}` : ''}
               </td>
@@ -374,25 +393,43 @@
           `).join('');
         }
 
-        // Initial render
-        renderEvents(data.events);
+        // Function to apply filters
+        function applyFilters() {
+          const query = searchInput.value.toLowerCase();
+          const source = sourceFilter.value;
 
-        // Search functionality
-        searchInput.addEventListener('input', (e) => {
-          const query = e.target.value.toLowerCase();
-          const filtered = data.events.filter(event =>
-            event.event_name.toLowerCase().includes(query) ||
-            event.category.toLowerCase().includes(query) ||
-            event.area.toLowerCase().includes(query) ||
-            event.event_id.toLowerCase().includes(query)
-          );
+          let filtered = allEvents.filter(event => {
+            const matchesSearch = event.event_name.toLowerCase().includes(query) ||
+                                event.category.toLowerCase().includes(query) ||
+                                event.area.toLowerCase().includes(query) ||
+                                event.event_id.toLowerCase().includes(query);
+            const matchesSource = source === 'all' || event.source === source;
+            return matchesSearch && matchesSource;
+          });
+
           renderEvents(filtered);
           countSpan.textContent = `${filtered.length}`;
-        });
+
+          // Update source label
+          if (source === 'all') {
+            sourceLabel.textContent = 'All sources';
+          } else if (source === 'ChatGPT') {
+            sourceLabel.textContent = 'ChatGPT Forecast only';
+          } else {
+            sourceLabel.textContent = 'Claude Forecast only';
+          }
+        }
+
+        // Initial render
+        applyFilters();
+
+        // Search functionality
+        searchInput.addEventListener('input', applyFilters);
+        sourceFilter.addEventListener('change', applyFilters);
 
       } catch (error) {
         console.error('Error loading events:', error);
-        document.getElementById('eventsBody').innerHTML = '<tr><td colspan="6" style="padding: 2rem; text-align: center; color: var(--muted);">Error loading events data</td></tr>';
+        document.getElementById('eventsBody').innerHTML = '<tr><td colspan="7" style="padding: 2rem; text-align: center; color: var(--muted);">Error loading events data</td></tr>';
       }
     }
 
