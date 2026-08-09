@@ -197,6 +197,44 @@
       border-radius: 2px;
     }
 
+    .export-btn {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: var(--text-mono-sm);
+      font-weight: 700;
+      letter-spacing: var(--tracking-label);
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all var(--motion-fast);
+    }
+
+    .export-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .export-btn:active {
+      transform: translateY(0);
+    }
+
+    #exportCsvBtn {
+      background: var(--amber);
+      color: var(--ink);
+    }
+
+    #exportJsonBtn {
+      background: var(--teal);
+      color: var(--ink);
+    }
+
+    #generatePdfBtn {
+      background: var(--panel);
+      border: 2px solid var(--amber);
+      color: var(--text);
+    }
+
     .overlay-chart {
       position: relative;
       height: 280px;
@@ -312,6 +350,12 @@
           <option value="Sunday">Sunday</option>
         </select>
       </div>
+    </div>
+
+    <div style="display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
+      <button id="exportCsvBtn" class="export-btn">Export CSV</button>
+      <button id="exportJsonBtn" class="export-btn">Export JSON</button>
+      <button id="generatePdfBtn" class="export-btn">Generate PDF</button>
     </div>
 
     <div class="metrics-grid">
@@ -495,12 +539,206 @@
       renderTable(predicted, actual);
     }
 
+    function exportToCSV() {
+      const daySelect = document.getElementById('daySelect');
+      const selectedDay = daySelect.value;
+      const date = document.getElementById('comparisonDate').value;
+
+      if (!forecastData || !forecastData.hourly_patterns[selectedDay]) return;
+
+      const predicted = forecastData.hourly_patterns[selectedDay].map(h => h.demand);
+      const actual = generateActualData(predicted);
+
+      let csv = 'Hour,Predicted,Actual,Difference,Percent Error,Accuracy\n';
+      predicted.forEach((p, i) => {
+        const diff = actual[i] - p;
+        const pctError = Math.abs(diff) / actual[i];
+        const isAccurate = pctError <= 0.1;
+        const hour = String(i).padStart(2, '0') + ':00';
+        const accuracy = isAccurate ? 'Good' : 'Off';
+        csv += `${hour},${p},${actual[i]},${diff},${Math.round(pctError * 100)}%,${accuracy}\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `forecast-comparison-${selectedDay}-${date}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    }
+
+    function exportToJSON() {
+      const daySelect = document.getElementById('daySelect');
+      const selectedDay = daySelect.value;
+      const date = document.getElementById('comparisonDate').value;
+
+      if (!forecastData || !forecastData.hourly_patterns[selectedDay]) return;
+
+      const predicted = forecastData.hourly_patterns[selectedDay].map(h => h.demand);
+      const actual = generateActualData(predicted);
+      const metrics = calculateMetrics(predicted, actual);
+
+      const hourlyData = predicted.map((p, i) => ({
+        hour: String(i).padStart(2, '0') + ':00',
+        predicted: p,
+        actual: actual[i],
+        difference: actual[i] - p,
+        percentError: Math.round((Math.abs(actual[i] - p) / actual[i]) * 100),
+        accurate: (Math.abs(actual[i] - p) / actual[i]) <= 0.1
+      }));
+
+      const report = {
+        metadata: {
+          date: date,
+          dayOfWeek: selectedDay,
+          generatedAt: new Date().toISOString()
+        },
+        metrics: metrics,
+        hourlyData: hourlyData
+      };
+
+      const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `forecast-comparison-${selectedDay}-${date}.json`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    }
+
+    function generatePDFReport() {
+      const daySelect = document.getElementById('daySelect');
+      const selectedDay = daySelect.value;
+      const date = document.getElementById('comparisonDate').value;
+
+      if (!forecastData || !forecastData.hourly_patterns[selectedDay]) return;
+
+      const predicted = forecastData.hourly_patterns[selectedDay].map(h => h.demand);
+      const actual = generateActualData(predicted);
+      const metrics = calculateMetrics(predicted, actual);
+
+      const doc = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Forecast Accuracy Report</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; color: #1f1810; }
+    h1 { color: #F4A538; border-bottom: 3px solid #F4A538; padding-bottom: 10px; }
+    h2 { color: #2BA4A8; margin-top: 30px; }
+    .metrics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 20px 0; }
+    .metric-box { border: 2px solid #F4A538; padding: 15px; border-radius: 5px; }
+    .metric-label { font-size: 12px; text-transform: uppercase; color: #F4A538; font-weight: bold; }
+    .metric-value { font-size: 32px; font-weight: bold; color: #1f1810; }
+    .metric-detail { font-size: 12px; color: #666; margin-top: 5px; }
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    th { background-color: #F4A538; color: white; padding: 10px; text-align: left; }
+    td { border-bottom: 1px solid #e0e0e0; padding: 8px; }
+    tr:nth-child(even) { background-color: #f9f9f9; }
+    .good { background-color: #e8f5f3; color: #2BA4A8; }
+    .off { background-color: #fff3e0; color: #F4A538; }
+    .summary { background-color: #fdf8f0; border: 2px solid #F4A538; padding: 20px; margin: 20px 0; border-radius: 5px; }
+    .footer { margin-top: 40px; font-size: 12px; color: #999; border-top: 1px solid #e0e0e0; padding-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>Demand Forecast Accuracy Report</h1>
+  <div class="summary">
+    <p><strong>Analysis Date:</strong> ${date}</p>
+    <p><strong>Day of Week:</strong> ${selectedDay}</p>
+    <p><strong>Generated:</strong> ${new Date().toLocaleString()}</p>
+  </div>
+
+  <h2>Performance Metrics</h2>
+  <div class="metrics">
+    <div class="metric-box">
+      <div class="metric-label">Mean Absolute Error</div>
+      <div class="metric-value">${metrics.mae}</div>
+      <div class="metric-detail">Average deviation (units)</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-label">RMSE</div>
+      <div class="metric-value">${metrics.rmse}</div>
+      <div class="metric-detail">Root mean squared error</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-label">Accuracy Rate</div>
+      <div class="metric-value">${metrics.accuracy}%</div>
+      <div class="metric-detail">Within ±10% of actual</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-label">Peak Error</div>
+      <div class="metric-value">${metrics.peakError}</div>
+      <div class="metric-detail">Largest single deviation</div>
+    </div>
+  </div>
+
+  <h2>Hourly Analysis</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Hour</th>
+        <th>Predicted</th>
+        <th>Actual</th>
+        <th>Difference</th>
+        <th>% Error</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${predicted.map((p, i) => {
+        const diff = actual[i] - p;
+        const pctError = Math.abs(diff) / actual[i];
+        const isAccurate = pctError <= 0.1;
+        const statusClass = isAccurate ? 'good' : 'off';
+        const statusText = isAccurate ? '✓ Good' : '✗ Off';
+        const hour = String(i).padStart(2, '0') + ':00';
+        return `<tr>
+          <td>${hour}</td>
+          <td>${p}</td>
+          <td>${actual[i]}</td>
+          <td>${diff > 0 ? '+' : ''}${diff}</td>
+          <td>${Math.round(pctError * 100)}%</td>
+          <td class="${statusClass}">${statusText}</td>
+        </tr>`;
+      }).join('')}
+    </tbody>
+  </table>
+
+  <div class="summary">
+    <h2 style="margin-top: 0;">Summary</h2>
+    <p>This forecast validation report demonstrates the accuracy of the demand prediction model across the 24-hour period for ${selectedDay}. The model achieved a ${metrics.accuracy}% accuracy rate with a mean absolute error of ${metrics.mae} units.</p>
+    <p>Systematic analysis of hourly predictions reveals opportunities for model refinement, particularly during peak demand periods where prediction variability tends to be highest.</p>
+  </div>
+
+  <div class="footer">
+    <p>Urban Transit Lab · Micromobility Demand Forecasting Platform</p>
+    <p>© 2026 Steven Needham · Public data and open methodology</p>
+  </div>
+</body>
+</html>`;
+
+      const printWindow = window.open('', '', 'width=800,height=600');
+      printWindow.document.write(doc);
+      printWindow.document.close();
+      setTimeout(() => printWindow.print(), 250);
+    }
+
     function initialize() {
       const comparisonDate = document.getElementById('comparisonDate');
       const today = new Date();
       comparisonDate.valueAsDate = today;
       comparisonDate.addEventListener('change', updateComparison);
       document.getElementById('daySelect').addEventListener('change', updateComparison);
+
+      document.getElementById('exportCsvBtn').addEventListener('click', exportToCSV);
+      document.getElementById('exportJsonBtn').addEventListener('click', exportToJSON);
+      document.getElementById('generatePdfBtn').addEventListener('click', generatePDFReport);
 
       updateComparison();
     }
