@@ -264,183 +264,57 @@
         <path d="M 54 75 L 54 90 Q 54 98 60 98 L 68 98 Q 74 98 74 90 L 74 75 Z" fill="#2BA4A8" opacity="0.5"/>
         <path d="M 54 65 Q 54 68 56 70 L 72 70 Q 74 68 74 65 Z" fill="#F4A538" opacity="0.6"/>
       </svg>
-      <div class="eyebrow">Discovery & Development</div>
+      <div class="eyebrow">Weekly Status</div>
     </div>
-    <h1>Research Roadmap</h1>
-    <p>A living map of discoveries. As we build, we learn what matters most. This roadmap captures the editable-in-size explorations that could unlock new insights about micromobility demand.</p>
+    <h1>Urban Transit Lab</h1>
+    <p>A precise record of movement, attention and next action.</p>
   </header>
 
   <main class="roadmap-content">
-    <div class="progress-summary">
-      <div class="progress-card">
-        <div class="count" id="pendingCount">10</div>
-        <div class="label">Pending</div>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 3rem;">
+      <div style="padding: 1.5rem; border: 2px solid var(--amber); border-radius: var(--radius-md);">
+        <div style="font-family: var(--font-mono); font-size: var(--text-mono-xs); color: var(--amber); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Client</div>
+        <div style="font-family: var(--font-display); font-size: var(--text-h3); font-weight: 600; color: var(--text);">Urban Transit Lab</div>
       </div>
-      <div class="progress-card">
-        <div class="count" id="inProgressCount">0</div>
-        <div class="label">In Progress</div>
+      <div style="padding: 1.5rem; border: 2px solid var(--amber); border-radius: var(--radius-md);">
+        <div style="font-family: var(--font-mono); font-size: var(--text-mono-xs); color: var(--amber); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Week of</div>
+        <div style="font-family: var(--font-display); font-size: var(--text-h3); font-weight: 600; color: var(--text);" id="weekOf">August 9, 2026</div>
       </div>
-      <div class="progress-card">
-        <div class="count" id="completedCount">0</div>
-        <div class="label">Completed</div>
-      </div>
-    </div>
-
-    <div class="roadmap-intro">
-      <p><strong>How this works:</strong> Each item here is scoped to be achievable in a focused iteration. As we build and explore, we'll discover what works, what doesn't, and what questions lead somewhere interesting.</p>
-      <p>This lab is about learning. Every completed item becomes evidence about how to forecast demand more accurately. Every dead-end becomes a lesson about what doesn't matter.</p>
-    </div>
-
-    <div class="roadmap-section">
-      <div class="roadmap-section-title" style="display: flex; align-items: center; gap: 0.8rem;">
-        <svg width="20" height="20" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="64" cy="64" r="60" fill="none" stroke="#F4A538" stroke-width="2"/>
-          <path d="M 48 30 L 52 50 L 52 90 Q 52 100 60 100 L 68 100 Q 76 100 76 90 L 76 50 L 80 30 Z"
-                fill="none" stroke="#F4A538" stroke-width="1.5" stroke-linejoin="round"/>
-          <line x1="48" y1="30" x2="80" y2="30" stroke="#F4A538" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        Events & Visibility
-      </div>
-      <div class="roadmap-items">
-        <div class="roadmap-item">
-          <div class="roadmap-item-content">
-            <h3>Expand events viewer to include additional Excel sheets</h3>
-            <p>Currently showing only ChatGPT Forecast events. Extract and add Home Games, Weather data, and other event categories from the available Excel workbooks to give broader event coverage for demand analysis.</p>
-          </div>
-          <div class="roadmap-item-status">
-            <span class="status-badge pending">Pending</span>
-          </div>
-        </div>
-
-        <div class="roadmap-item">
-          <div class="roadmap-item-content">
-            <h3>Add date range picker to events viewer</h3>
-            <p>Allow users to filter events by date range to explore how events cluster during specific periods and identify peak activity windows.</p>
-          </div>
-          <div class="roadmap-item-status">
-            <span class="status-badge pending">Pending</span>
-          </div>
-        </div>
-
-        <div class="roadmap-item">
-          <div class="roadmap-item-content">
-            <h3>Integrate Claude Forecast events with ChatGPT events</h3>
-            <p>Extract events from Claude Forecast methodology workbook and display side-by-side or toggled view to show methodological differences in event identification and categorization.</p>
-          </div>
-          <div class="roadmap-item-status">
-            <span class="status-badge pending">Pending</span>
-          </div>
-        </div>
+      <div style="padding: 1.5rem; border: 2px solid var(--amber); border-radius: var(--radius-md);">
+        <div style="font-family: var(--font-mono); font-size: var(--text-mono-xs); color: var(--amber); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Status</div>
+        <div style="font-family: var(--font-display); font-size: var(--text-h3); font-weight: 600; color: var(--text);">On track</div>
       </div>
     </div>
 
-    <div class="roadmap-section">
-      <div class="roadmap-section-title" style="display: flex; align-items: center; gap: 0.8rem;">
-        <svg width="20" height="20" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="64" cy="64" r="60" fill="none" stroke="#F4A538" stroke-width="2"/>
-          <path d="M 58 25 L 58 72 Q 58 82 64 82 Q 70 82 70 72 L 70 25 Z"
-                fill="none" stroke="#F4A538" stroke-width="1.5" stroke-linejoin="round"/>
-          <rect x="54" y="20" width="20" height="6" rx="1" fill="#F4A538"/>
-          <path d="M 58 65 L 58 72 Q 58 80 64 80 Q 70 80 70 72 L 70 65 Z" fill="#F4A538" opacity="0.3"/>
-        </svg>
-        Data Visualization & Insight
-      </div>
-      <div class="roadmap-items">
-        <div class="roadmap-item">
-          <div class="roadmap-item-content">
-            <h3>Build geographic demand heatmap overlay</h3>
-            <p>Create visual heatmap showing demand distribution across Columbus zones (Downtown, University District, Transit Hubs, Residential). Layer with event locations to see geographic event impact.</p>
-          </div>
-          <div class="roadmap-item-status">
-            <span class="status-badge pending">Pending</span>
-          </div>
-        </div>
-
-        <div class="roadmap-item">
-          <div class="roadmap-item-content">
-            <h3>Create weather data visualization dashboard</h3>
-            <p>Display historical weather patterns and their correlation with demand. Show temperature, precipitation, wind speed effects on bike/scooter usage.</p>
-          </div>
-          <div class="roadmap-item-status">
-            <span class="status-badge pending">Pending</span>
-          </div>
-        </div>
-
-        <div class="roadmap-item">
-          <div class="roadmap-item-content">
-            <h3>Add demand forecast comparison view</h3>
-            <p>Show predicted vs actual demand side-by-side. Track forecast accuracy over time. Help identify which day-types and conditions are hardest to predict.</p>
-          </div>
-          <div class="roadmap-item-status">
-            <span class="status-badge pending">Pending</span>
-          </div>
-        </div>
+    <div style="margin-bottom: 4rem;">
+      <h2 style="font-family: var(--font-display); font-weight: 500; font-size: var(--text-h2); margin-bottom: 1.5rem; color: var(--text);">01. Deliverables</h2>
+      <div style="overflow-x: auto; border: 2px solid var(--amber); border-radius: var(--radius-sm);">
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+          <thead style="background: var(--amber); color: var(--ink);">
+            <tr>
+              <th style="padding: 0.8rem; text-align: left; font-weight: 600;">Deliverable</th>
+              <th style="padding: 0.8rem; text-align: left; font-weight: 600;">Owner</th>
+              <th style="padding: 0.8rem; text-align: center; font-weight: 600;">Status</th>
+            </tr>
+          </thead>
+          <tbody id="deliverablesList">
+          </tbody>
+        </table>
       </div>
     </div>
 
-    <div class="roadmap-section">
-      <div class="roadmap-section-title" style="display: flex; align-items: center; gap: 0.8rem;">
-        <svg width="20" height="20" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="64" cy="64" r="60" fill="none" stroke="#F4A538" stroke-width="2"/>
-          <path d="M 48 30 L 52 50 L 52 90 Q 52 100 60 100 L 68 100 Q 76 100 76 90 L 76 50 L 80 30 Z"
-                fill="none" stroke="#F4A538" stroke-width="1.5" stroke-linejoin="round"/>
-          <line x1="48" y1="30" x2="80" y2="30" stroke="#2BA4A8" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M 54 75 L 54 90 Q 54 98 60 98 L 68 98 Q 74 98 74 90 L 74 75 Z" fill="#F4A538" opacity="0.4"/>
-        </svg>
-        Operational Tools & Analytics
-      </div>
-      <div class="roadmap-items">
-        <div class="roadmap-item">
-          <div class="roadmap-item-content">
-            <h3>Build operator performance tracking by vehicle model and zone</h3>
-            <p>Dashboard showing how different vehicle types (Spin vs Veo) and fleets perform in different geographic zones. Track utilization, availability, turnover rates.</p>
+    <div style="margin-bottom: 4rem;">
+      <h2 style="font-family: var(--font-display); font-weight: 500; font-size: var(--text-h2); margin-bottom: 1.5rem; color: var(--text);">02. Decision Needed</h2>
+      <div style="padding: 2rem; border: 2px solid var(--amber); border-radius: var(--radius-md); background: var(--panel);">
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+          <div>
+            <div style="font-family: var(--font-mono); font-size: var(--text-mono-xs); color: var(--amber); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.8rem; font-weight: 600;">Accountable Role</div>
+            <p style="font-family: var(--font-display); font-size: var(--text-h4); font-weight: 600; color: var(--text); margin: 0 0 1rem;">Expand events viewer to additional data sources</p>
+            <p style="color: var(--muted); margin: 0; font-size: var(--text-body-sm);">Extract and integrate Home Games, additional weather categories, and other event data from available Excel workbooks to broaden event coverage for demand analysis.</p>
           </div>
-          <div class="roadmap-item-status">
-            <span class="status-badge pending">Pending</span>
-          </div>
-        </div>
-
-        <div class="roadmap-item">
-          <div class="roadmap-item-content">
-            <h3>Create battery swap target calculator</h3>
-            <p>Tool to estimate daily battery maintenance needs based on predicted demand patterns. Help operators plan workforce allocation for recharging schedules.</p>
-          </div>
-          <div class="roadmap-item-status">
-            <span class="status-badge pending">Pending</span>
-          </div>
-        </div>
-
-        <div class="roadmap-item">
-          <div class="roadmap-item-content">
-            <h3>Build export and report generation for forecasts</h3>
-            <p>Allow users to export forecast predictions, event summaries, and analysis reports in PDF/CSV format for operational planning and stakeholder communication.</p>
-          </div>
-          <div class="roadmap-item-status">
-            <span class="status-badge pending">Pending</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="roadmap-section">
-      <div class="roadmap-section-title" style="display: flex; align-items: center; gap: 0.8rem;">
-        <svg width="20" height="20" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="64" cy="64" r="60" fill="none" stroke="#F4A538" stroke-width="2"/>
-          <path d="M 58 25 L 58 72 Q 58 82 64 82 Q 70 82 70 72 L 70 25 Z"
-                fill="none" stroke="#2BA4A8" stroke-width="1.5" stroke-linejoin="round"/>
-          <rect x="54" y="20" width="20" height="6" rx="1" fill="#F4A538"/>
-          <path d="M 58 65 L 58 72 Q 58 80 64 80 Q 70 80 70 72 L 70 65 Z" fill="#2BA4A8" opacity="0.4"/>
-        </svg>
-        Integration & Connections
-      </div>
-      <div class="roadmap-items">
-        <div class="roadmap-item">
-          <div class="roadmap-item-content">
-            <h3>Connect case study insights to live data examples</h3>
-            <p>Link case study lessons (e.g., 'get baseline right', 'zone-specific truths') to interactive examples in forecast and events viewers showing real data evidence for each lesson.</p>
-          </div>
-          <div class="roadmap-item-status">
-            <span class="status-badge pending">Pending</span>
+          <div>
+            <div style="font-family: var(--font-mono); font-size: var(--text-mono-xs); color: var(--amber); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.8rem; font-weight: 600;">Expected Date</div>
+            <p style="font-family: var(--font-display); font-size: var(--text-h4); font-weight: 600; color: var(--text); margin: 0;">August 23, 2026</p>
           </div>
         </div>
       </div>
@@ -457,23 +331,39 @@
   </footer>
 
   <script>
-    // Update progress counts based on item status
-    function updateProgressCounts() {
-      const items = document.querySelectorAll('.roadmap-item');
-      let pending = 0, inProgress = 0, completed = 0;
+    const deliverables = [
+      { name: 'Expand events viewer to additional Excel sheets', owner: 'Claude', status: 'Pending' },
+      { name: 'Add date range picker to events viewer', owner: 'Claude', status: 'Complete' },
+      { name: 'Integrate Claude Forecast events with ChatGPT events', owner: 'Claude', status: 'Complete' },
+      { name: 'Build geographic demand heatmap overlay', owner: 'Claude', status: 'Complete' },
+      { name: 'Create weather data visualization dashboard', owner: 'Claude', status: 'Complete' },
+      { name: 'Connect case study insights to live data examples', owner: 'Steven', status: 'Pending' },
+      { name: 'Build operator performance tracking by vehicle model and zone', owner: 'Steven', status: 'Pending' },
+      { name: 'Create battery swap target calculator', owner: 'Steven', status: 'Pending' },
+      { name: 'Add demand forecast comparison view', owner: 'Claude', status: 'Pending' },
+      { name: 'Build export and report generation for forecasts', owner: 'Steven', status: 'Pending' }
+    ];
 
-      items.forEach(item => {
-        if (item.classList.contains('completed')) completed++;
-        else if (item.classList.contains('in-progress')) inProgress++;
-        else pending++;
-      });
-
-      document.getElementById('pendingCount').textContent = pending;
-      document.getElementById('inProgressCount').textContent = inProgress;
-      document.getElementById('completedCount').textContent = completed;
+    function populateDeliverables() {
+      const tbody = document.getElementById('deliverablesList');
+      tbody.innerHTML = deliverables.map((item, idx) => {
+        const statusColor = item.status === 'Complete' ? 'var(--teal)' : 'var(--amber)';
+        const statusBg = item.status === 'Complete' ? 'rgba(32, 178, 170, 0.1)' : 'rgba(244, 165, 56, 0.1)';
+        return `
+          <tr style="border-bottom: 1px solid var(--panel-line); ${idx % 2 === 0 ? 'background: rgba(244, 165, 56, 0.02);' : ''}">
+            <td style="padding: 0.8rem; font-weight: 500;">${item.name}</td>
+            <td style="padding: 0.8rem; color: var(--muted); font-size: 0.9rem;">${item.owner}</td>
+            <td style="padding: 0.8rem; text-align: center;">
+              <span style="display: inline-block; padding: 0.3rem 0.6rem; border-radius: 3px; font-size: 0.8rem; font-weight: 600; background: ${statusBg}; color: ${statusColor};">
+                ${item.status}
+              </span>
+            </td>
+          </tr>
+        `;
+      }).join('');
     }
 
-    document.addEventListener('DOMContentLoaded', updateProgressCounts);
+    document.addEventListener('DOMContentLoaded', populateDeliverables);
   </script>
 </body>
 </html>
