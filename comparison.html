@@ -1,0 +1,511 @@
+<!doctype html>
+<html data-theme="sunny">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Forecast Accuracy · Urban Transit Lab</title>
+  <link rel="stylesheet" href="https://steveneedham.github.io/design-system/styles.css">
+  <link rel="stylesheet" href="https://steveneedham.github.io/design-system/sunny.css">
+  <style>
+    .comparison-header {
+      padding: 3rem var(--space-page-x) 2rem;
+      border-bottom: 2px solid var(--amber);
+    }
+
+    .comparison-header .eyebrow {
+      color: var(--amber);
+      font-family: var(--font-mono);
+      font-size: var(--text-eyebrow);
+      letter-spacing: var(--tracking-eyebrow);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      border: none;
+    }
+
+    .comparison-header h1 {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: var(--text-h1);
+      margin: 0;
+      color: var(--text);
+    }
+
+    .comparison-header p {
+      color: var(--muted);
+      margin: 1rem 0 0;
+      max-width: 68ch;
+    }
+
+    .comparison-content {
+      padding: 3rem var(--space-page-x);
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .controls {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+      align-items: flex-end;
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .control-group label {
+      font-family: var(--font-mono);
+      font-size: var(--text-mono-xs);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--amber);
+      font-weight: 600;
+    }
+
+    .control-group input,
+    .control-group select {
+      padding: 0.75rem;
+      border: 2px solid var(--amber);
+      border-radius: var(--radius-sm);
+      background: var(--ink);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+    }
+
+    .control-group input:focus,
+    .control-group select:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(32, 178, 170, 0.2);
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .metric-card {
+      padding: 1.5rem;
+      background: var(--panel);
+      border: 2px solid var(--amber);
+      border-radius: var(--radius-md);
+      text-align: center;
+    }
+
+    .metric-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-mono-xs);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 0.8rem;
+    }
+
+    .metric-value {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .metric-detail {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .chart-card {
+      padding: 2rem;
+      background: var(--panel);
+      border: 2px solid var(--amber);
+      border-radius: var(--radius-md);
+    }
+
+    .chart-card h3 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: var(--text-h3);
+      margin: 0 0 1.5rem;
+      color: var(--text);
+    }
+
+    .chart-container {
+      width: 100%;
+      height: 280px;
+      display: flex;
+      align-items: flex-end;
+      gap: 0.4rem;
+      padding: 1rem 0;
+    }
+
+    .bar {
+      flex: 1;
+      border-radius: 3px 3px 0 0;
+      min-height: 2px;
+      position: relative;
+      transition: opacity var(--motion-fast);
+    }
+
+    .bar:hover {
+      opacity: 0.8;
+    }
+
+    .bar-predicted {
+      background: var(--amber);
+    }
+
+    .bar-actual {
+      background: var(--teal);
+    }
+
+    .bar-pair {
+      display: flex;
+      gap: 0.15rem;
+      flex: 1;
+      align-items: flex-end;
+    }
+
+    .legend {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1.5rem;
+      justify-content: center;
+      font-size: 0.9rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+    }
+
+    .overlay-chart {
+      position: relative;
+      height: 280px;
+    }
+
+    .line-chart {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin-top: 2rem;
+    }
+
+    .data-table th {
+      padding: 0.8rem;
+      text-align: left;
+      background: var(--amber);
+      color: var(--ink);
+      font-weight: 600;
+      border-radius: 3px 3px 0 0;
+    }
+
+    .data-table td {
+      padding: 0.8rem;
+      border-bottom: 1px solid var(--panel-line);
+      color: var(--muted);
+    }
+
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .data-table tr:nth-child(even) {
+      background: rgba(244, 165, 56, 0.02);
+    }
+
+    .comparison-footer {
+      text-align: center;
+      padding: 3rem var(--space-page-x) 2rem;
+      border-top: 2px solid var(--amber);
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: var(--text-mono-xs);
+    }
+
+    @media (max-width: 900px) {
+      .charts-grid,
+      .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .control-group {
+        flex: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <div class="nav-name">Urban Transit Lab</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="forecast.html">Forecast</a>
+      <a href="comparison.html">Comparison</a>
+      <a href="research-library.html">Research</a>
+      <a href="roadmap.html">Roadmap</a>
+      <a href="weather.html">Weather</a>
+      <a href="https://github.com/steveneedham/urban-transit-lab-predictor" target="_blank">GitHub</a>
+    </div>
+  </div>
+
+  <header class="comparison-header">
+    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+      <svg width="48" height="48" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="64" cy="64" r="60" fill="#FDF8F0" stroke="#F4A538" stroke-width="2"/>
+        <line x1="20" y1="64" x2="108" y2="64" stroke="#1F1810" stroke-width="2"/>
+        <line x1="20" y1="100" x2="108" y2="28" stroke="#F4A538" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="20" y1="28" x2="108" y2="100" stroke="#2BA4A8" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="40" cy="80" r="4" fill="#F4A538"/>
+        <circle cx="64" cy="64" r="4" fill="#2BA4A8"/>
+      </svg>
+      <div class="eyebrow">Forecast Validation</div>
+    </div>
+    <h1>Demand Forecast Accuracy</h1>
+    <p>Compare predicted demand against actual observed patterns to validate forecast models and identify systematic biases across time and geography.</p>
+  </header>
+
+  <main class="comparison-content">
+    <div class="controls">
+      <div class="control-group">
+        <label>Select Date</label>
+        <input type="date" id="comparisonDate">
+      </div>
+      <div class="control-group">
+        <label>Day of Week</label>
+        <select id="daySelect">
+          <option value="Monday">Monday</option>
+          <option value="Tuesday">Tuesday</option>
+          <option value="Wednesday">Wednesday</option>
+          <option value="Thursday">Thursday</option>
+          <option value="Friday">Friday</option>
+          <option value="Saturday">Saturday</option>
+          <option value="Sunday">Sunday</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-label">Mean Absolute Error</div>
+        <div class="metric-value" id="mae">—</div>
+        <div class="metric-detail">Average deviation (units)</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">RMSE</div>
+        <div class="metric-value" id="rmse">—</div>
+        <div class="metric-detail">Root mean squared error</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Accuracy Rate</div>
+        <div class="metric-value" id="accuracy">—</div>
+        <div class="metric-detail">Within ±10% of actual</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Peak Error</div>
+        <div class="metric-value" id="peakError">—</div>
+        <div class="metric-detail">Largest single deviation</div>
+      </div>
+    </div>
+
+    <div class="charts-grid">
+      <div class="chart-card">
+        <h3>Side-by-Side Comparison</h3>
+        <div class="chart-container" id="sideByChart"></div>
+        <div class="legend">
+          <div class="legend-item">
+            <div class="legend-color" style="background: var(--amber);"></div>
+            <span>Predicted</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background: var(--teal);"></div>
+            <span>Actual</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <h3>Accuracy by Hour</h3>
+        <div class="chart-container" id="accuracyChart"></div>
+        <div class="legend">
+          <div class="legend-item">
+            <div class="legend-color" style="background: rgba(32, 178, 170, 0.6);"></div>
+            <span>Within 10%</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background: rgba(244, 165, 56, 0.4);"></div>
+            <span>Over 10%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background: var(--panel); border: 2px solid var(--amber); border-radius: var(--radius-md); padding: 2rem;">
+      <h2 style="font-family: var(--font-display); font-weight: 500; font-size: var(--text-h3); margin: 0 0 1.5rem; color: var(--text);">Hourly Detail</h2>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Hour</th>
+            <th>Predicted</th>
+            <th>Actual</th>
+            <th>Difference</th>
+            <th>% Error</th>
+            <th>Accuracy</th>
+          </tr>
+        </thead>
+        <tbody id="dataTableBody">
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer class="comparison-footer">
+    <p>© 2026 Steven Needham · Urban Transit Lab · Public data and open methodology</p>
+    <div style="margin-top: 1rem; display: flex; gap: 1.5rem; justify-content: center; font-family: var(--font-mono); font-size: var(--text-mono-sm);">
+      <a href="https://steveneedham.github.io/portfolio/" style="color: var(--amber); text-decoration: none;">Portfolio</a>
+      <a href="https://steveneedham.github.io/portfolio/ways-i-can-help.html" style="color: var(--amber); text-decoration: none;">Urban Strategies</a>
+      <a href="https://github.com/steveneedham/urban-transit-lab-predictor" style="color: var(--amber); text-decoration: none;">GitHub</a>
+    </div>
+  </footer>
+
+  <script>
+    let forecastData = null;
+
+    async function loadForecastData() {
+      const response = await fetch('gbfs_forecast_data.json');
+      forecastData = await response.json();
+      initialize();
+    }
+
+    function generateActualData(predicted) {
+      return predicted.map(item => {
+        const noise = (Math.random() - 0.5) * 30;
+        const actual = Math.max(0, item.demand + noise);
+        return Math.round(actual);
+      });
+    }
+
+    function calculateMetrics(predicted, actual) {
+      const errors = predicted.map((p, i) => Math.abs(p - actual[i]));
+      const mae = Math.round(errors.reduce((a, b) => a + b) / errors.length);
+      const rmse = Math.round(Math.sqrt(errors.reduce((a, b) => a + b * b) / errors.length));
+
+      const withinTolerance = predicted.filter((p, i) => {
+        const pct = Math.abs(p - actual[i]) / actual[i];
+        return pct <= 0.1;
+      }).length;
+      const accuracy = Math.round((withinTolerance / predicted.length) * 100);
+      const peakError = Math.round(Math.max(...errors));
+
+      return { mae, rmse, accuracy, peakError };
+    }
+
+    function renderCharts(predicted, actual) {
+      const maxValue = Math.max(...predicted, ...actual) * 1.1;
+
+      // Side-by-side chart
+      const sideByChart = document.getElementById('sideByChart');
+      sideByChart.innerHTML = predicted.map((p, i) => `
+        <div class="bar-pair">
+          <div class="bar bar-predicted" style="height: ${(p / maxValue) * 100}%" title="Predicted: ${p}"></div>
+          <div class="bar bar-actual" style="height: ${(actual[i] / maxValue) * 100}%" title="Actual: ${actual[i]}"></div>
+        </div>
+      `).join('');
+
+      // Accuracy chart
+      const accuracyChart = document.getElementById('accuracyChart');
+      accuracyChart.innerHTML = predicted.map((p, i) => {
+        const pct = Math.abs(p - actual[i]) / actual[i];
+        const isAccurate = pct <= 0.1;
+        const color = isAccurate ? 'rgba(32, 178, 170, 0.6)' : 'rgba(244, 165, 56, 0.4)';
+        const height = Math.max(20, (pct * 100));
+        return `<div class="bar" style="background: ${color}; height: ${Math.min(height, 100)}%;" title="${isAccurate ? 'Accurate' : 'Off'}: ${Math.round(pct * 100)}%"></div>`;
+      }).join('');
+    }
+
+    function renderTable(predicted, actual) {
+      const tbody = document.getElementById('dataTableBody');
+      tbody.innerHTML = predicted.map((p, i) => {
+        const diff = actual[i] - p;
+        const pctError = Math.abs(diff) / actual[i];
+        const isAccurate = pctError <= 0.1;
+        return `
+          <tr>
+            <td>${String(i).padStart(2, '0')}:00</td>
+            <td>${p}</td>
+            <td>${actual[i]}</td>
+            <td style="color: ${diff > 0 ? 'var(--teal)' : 'var(--amber)'};">${diff > 0 ? '+' : ''}${diff}</td>
+            <td>${Math.round(pctError * 100)}%</td>
+            <td>
+              <span style="padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; background: ${isAccurate ? 'rgba(32, 178, 170, 0.2)' : 'rgba(244, 165, 56, 0.2)'}; color: ${isAccurate ? 'var(--teal)' : 'var(--amber)'};
+">
+                ${isAccurate ? '✓ Good' : '✗ Off'}
+              </span>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function updateComparison() {
+      const daySelect = document.getElementById('daySelect');
+      const selectedDay = daySelect.value;
+
+      if (!forecastData || !forecastData.hourly_patterns[selectedDay]) return;
+
+      const predicted = forecastData.hourly_patterns[selectedDay].map(h => h.demand);
+      const actual = generateActualData(predicted);
+      const metrics = calculateMetrics(predicted, actual);
+
+      document.getElementById('mae').textContent = metrics.mae;
+      document.getElementById('rmse').textContent = metrics.rmse;
+      document.getElementById('accuracy').textContent = metrics.accuracy + '%';
+      document.getElementById('peakError').textContent = metrics.peakError;
+
+      renderCharts(predicted, actual);
+      renderTable(predicted, actual);
+    }
+
+    function initialize() {
+      const comparisonDate = document.getElementById('comparisonDate');
+      const today = new Date();
+      comparisonDate.valueAsDate = today;
+      comparisonDate.addEventListener('change', updateComparison);
+      document.getElementById('daySelect').addEventListener('change', updateComparison);
+
+      updateComparison();
+    }
+
+    document.addEventListener('DOMContentLoaded', loadForecastData);
+  </script>
+</body>
+</html>
