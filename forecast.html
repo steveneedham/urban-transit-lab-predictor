@@ -493,6 +493,14 @@
         `;
       }).join('');
 
+      // Create zone opacity map based on demand
+      const zoneOpacity = {};
+      const maxZoneDemand = Math.max(...forecast.hotspots.map(h => h.demand));
+      forecast.hotspots.forEach(spot => {
+        const opacityValue = 0.3 + (spot.demand / maxZoneDemand) * 0.7;
+        zoneOpacity[spot.name] = opacityValue.toFixed(2);
+      });
+
       const hotspotsHtml = forecast.hotspots.map((spot, i) => {
         const barHeight = (spot.demand / forecast.totalTrips) * 100;
         return `
@@ -551,7 +559,40 @@
         <div class="forecast-card" style="margin-bottom: 2rem;">
           <div class="eyebrow">Geographic</div>
           <h2>Demand by Zone</h2>
-          <div>${hotspotsHtml}</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem;">
+            <div>${hotspotsHtml}</div>
+            <div style="display: flex; align-items: center; justify-content: center;">
+              <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-width: 300px; border: 2px solid var(--amber); border-radius: var(--radius-sm); background: var(--ink);">
+                <!-- Downtown Core -->
+                <g id="downtown" class="zone-region" data-zone="Downtown Core">
+                  <rect x="140" y="80" width="80" height="70" fill="#F4A538" opacity="${zoneOpacity['Downtown Core'] || 0.8}" stroke="#F4A538" stroke-width="2"/>
+                  <text x="180" y="125" text-anchor="middle" fill="#1F1810" font-size="10" font-weight="600" font-family="monospace">Downtown</text>
+                </g>
+                <!-- University District -->
+                <g id="university" class="zone-region" data-zone="University District">
+                  <rect x="240" y="100" width="75" height="60" fill="#2BA4A8" opacity="${zoneOpacity['University District'] || 0.6}" stroke="#2BA4A8" stroke-width="2"/>
+                  <text x="277" y="135" text-anchor="middle" fill="#FDF8F0" font-size="9" font-weight="600" font-family="monospace">University</text>
+                </g>
+                <!-- Transit Hubs -->
+                <g id="transit" class="zone-region" data-zone="Transit Hubs">
+                  <rect x="120" y="160" width="70" height="55" fill="#E8A33D" opacity="${zoneOpacity['Transit Hubs'] || 0.5}" stroke="#E8A33D" stroke-width="2"/>
+                  <text x="155" y="192" text-anchor="middle" fill="#1F1810" font-size="9" font-weight="600" font-family="monospace">Transit</text>
+                </g>
+                <!-- Residential North -->
+                <g id="res-north" class="zone-region" data-zone="Residential North">
+                  <rect x="50" y="100" width="65" height="55" fill="#A67C52" opacity="${zoneOpacity['Residential North'] || 0.4}" stroke="#A67C52" stroke-width="2"/>
+                  <text x="82" y="132" text-anchor="middle" fill="#FDF8F0" font-size="8" font-weight="600" font-family="monospace">Res N</text>
+                </g>
+                <!-- Residential East -->
+                <g id="res-east" class="zone-region" data-zone="Residential East">
+                  <rect x="240" y="180" width="65" height="50" fill="#8B7355" opacity="${zoneOpacity['Residential East'] || 0.3}" stroke="#8B7355" stroke-width="2"/>
+                  <text x="272" y="210" text-anchor="middle" fill="#FDF8F0" font-size="8" font-weight="600" font-family="monospace">Res E</text>
+                </g>
+                <!-- Legend -->
+                <text x="10" y="290" fill="#FDF8F0" font-size="8" font-family="monospace">Higher opacity = higher demand</text>
+              </svg>
+            </div>
+          </div>
         </div>
 
         <div class="insights">
