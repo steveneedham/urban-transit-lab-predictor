@@ -293,15 +293,30 @@
     <section class="library-section">
       <div class="section-eyebrow">Events Database</div>
       <h2>Integrated Events Viewer</h2>
-      <p class="library-intro">135 events from ChatGPT Forecast (90) and Claude Forecast (45) models (2024–2026). Search by name, category, or area to see impact tier and dates.</p>
+      <p class="library-intro">135 events from ChatGPT Forecast (90) and Claude Forecast (45) models (2024–2026). Search, filter by date range or source, and view ISO week assignments.</p>
 
-      <div style="margin-bottom: 1.5rem; display: grid; grid-template-columns: 1fr auto; gap: 1.5rem; align-items: center;">
-        <input type="text" id="eventSearch" placeholder="Search events..." style="width: 100%; padding: 0.75rem; border: 2px solid var(--amber); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: var(--text-body);">
-        <select id="sourceFilter" style="padding: 0.75rem; border: 2px solid var(--amber); border-radius: var(--radius-sm); background: var(--ink); color: var(--text); font-family: var(--font-body); font-size: var(--text-body); cursor: pointer;">
-          <option value="all">All Sources</option>
-          <option value="ChatGPT">ChatGPT Forecast</option>
-          <option value="Claude">Claude Forecast</option>
-        </select>
+      <div style="margin-bottom: 1.5rem;">
+        <input type="text" id="eventSearch" placeholder="Search events..." style="width: 100%; padding: 0.75rem; border: 2px solid var(--amber); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: var(--text-body); margin-bottom: 1rem;">
+
+        <div style="display: grid; grid-template-columns: auto auto 1fr auto; gap: 1rem; align-items: center; flex-wrap: wrap;">
+          <div style="display: flex; gap: 0.5rem;">
+            <button id="thisWeekBtn" style="padding: 0.5rem 1rem; background: var(--teal); color: var(--ink); border: none; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: background 0.2s;">This Week</button>
+            <button id="nextWeekBtn" style="padding: 0.5rem 1rem; background: var(--teal); color: var(--ink); border: none; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: background 0.2s;">Next Week</button>
+            <button id="clearDateBtn" style="padding: 0.5rem 1rem; background: var(--panel-line); color: var(--text); border: none; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: background 0.2s;">Clear</button>
+          </div>
+
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <input type="date" id="startDate" style="padding: 0.5rem; border: 2px solid var(--amber); border-radius: var(--radius-sm); background: var(--ink); color: var(--text); font-family: var(--font-body); font-size: 0.9rem;">
+            <span style="color: var(--muted);">to</span>
+            <input type="date" id="endDate" style="padding: 0.5rem; border: 2px solid var(--amber); border-radius: var(--radius-sm); background: var(--ink); color: var(--text); font-family: var(--font-body); font-size: 0.9rem;">
+          </div>
+
+          <select id="sourceFilter" style="padding: 0.5rem 0.75rem; border: 2px solid var(--amber); border-radius: var(--radius-sm); background: var(--ink); color: var(--text); font-family: var(--font-body); font-size: 0.9rem; cursor: pointer;">
+            <option value="all">All Sources</option>
+            <option value="ChatGPT">ChatGPT</option>
+            <option value="Claude">Claude</option>
+          </select>
+        </div>
       </div>
 
       <div style="overflow-x: auto; border: 2px solid var(--amber); border-radius: var(--radius-sm);">
@@ -313,7 +328,8 @@
               <th style="padding: 0.8rem; text-align: left; font-weight: 600;">Category</th>
               <th style="padding: 0.8rem; text-align: left; font-weight: 600;">Area</th>
               <th style="padding: 0.8rem; text-align: center; font-weight: 600;">Impact</th>
-              <th style="padding: 0.8rem; text-align: center; font-weight: 600;">Source</th>
+              <th style="padding: 0.8rem; text-align: center; font-weight: 600;">Src</th>
+              <th style="padding: 0.8rem; text-align: center; font-weight: 600;">ISO YR-WK</th>
               <th style="padding: 0.8rem; text-align: left; font-weight: 600;">Dates</th>
             </tr>
           </thead>
@@ -344,6 +360,45 @@
   </footer>
 
   <script>
+    // Calculate ISO week from date string (YYYY-MM-DD)
+    function getISOWeek(dateStr) {
+      const date = new Date(dateStr + 'T00:00:00Z');
+      const d = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
+      const dayNum = d.getUTCDay() || 7;
+      d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+      const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+      const weekNum = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+      const year = d.getUTCFullYear();
+      return `${year}-W${String(weekNum).padStart(2, '0')}`;
+    }
+
+    // Get current week start and end dates
+    function getCurrentWeekDates() {
+      const today = new Date();
+      const dayOfWeek = today.getDay();
+      const diff = today.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1);
+      const monday = new Date(today.setDate(diff));
+      const sunday = new Date(monday);
+      sunday.setDate(monday.getDate() + 6);
+      return {
+        start: monday.toISOString().split('T')[0],
+        end: sunday.toISOString().split('T')[0]
+      };
+    }
+
+    // Get next week start and end dates
+    function getNextWeekDates() {
+      const { start } = getCurrentWeekDates();
+      const monday = new Date(start);
+      monday.setDate(monday.getDate() + 7);
+      const sunday = new Date(monday);
+      sunday.setDate(monday.getDate() + 6);
+      return {
+        start: monday.toISOString().split('T')[0],
+        end: sunday.toISOString().split('T')[0]
+      };
+    }
+
     // Load and display integrated events data
     async function loadEvents() {
       try {
@@ -365,6 +420,11 @@
         const sourceLabel = document.getElementById('sourceLabel');
         const searchInput = document.getElementById('eventSearch');
         const sourceFilter = document.getElementById('sourceFilter');
+        const startDateInput = document.getElementById('startDate');
+        const endDateInput = document.getElementById('endDate');
+        const thisWeekBtn = document.getElementById('thisWeekBtn');
+        const nextWeekBtn = document.getElementById('nextWeekBtn');
+        const clearDateBtn = document.getElementById('clearDateBtn');
 
         // Function to render events
         function renderEvents(events) {
@@ -386,6 +446,9 @@
               <td style="padding: 0.8rem; text-align: center; font-size: 0.85rem; font-family: var(--font-mono); color: var(--muted);">
                 ${event.source}
               </td>
+              <td style="padding: 0.8rem; text-align: center; font-size: 0.85rem; font-family: var(--font-mono); color: var(--amber); font-weight: 600;">
+                ${getISOWeek(event.start_date)}
+              </td>
               <td style="padding: 0.8rem; font-size: 0.9rem; white-space: nowrap;">
                 ${event.start_date}${event.end_date !== event.start_date ? ` → ${event.end_date}` : ''}
               </td>
@@ -397,6 +460,8 @@
         function applyFilters() {
           const query = searchInput.value.toLowerCase();
           const source = sourceFilter.value;
+          const startDate = startDateInput.value;
+          const endDate = endDateInput.value;
 
           let filtered = allEvents.filter(event => {
             const matchesSearch = event.event_name.toLowerCase().includes(query) ||
@@ -404,7 +469,18 @@
                                 event.area.toLowerCase().includes(query) ||
                                 event.event_id.toLowerCase().includes(query);
             const matchesSource = source === 'all' || event.source === source;
-            return matchesSearch && matchesSource;
+
+            // Date range filtering - event overlaps with date range
+            let matchesDateRange = true;
+            if (startDate || endDate) {
+              const eventStart = event.start_date;
+              const eventEnd = event.end_date;
+              const filterStart = startDate || '1900-01-01';
+              const filterEnd = endDate || '2099-12-31';
+              matchesDateRange = eventStart <= filterEnd && eventEnd >= filterStart;
+            }
+
+            return matchesSearch && matchesSource && matchesDateRange;
           });
 
           renderEvents(filtered);
@@ -420,16 +496,41 @@
           }
         }
 
+        // This Week button
+        thisWeekBtn.addEventListener('click', () => {
+          const { start, end } = getCurrentWeekDates();
+          startDateInput.value = start;
+          endDateInput.value = end;
+          applyFilters();
+        });
+
+        // Next Week button
+        nextWeekBtn.addEventListener('click', () => {
+          const { start, end } = getNextWeekDates();
+          startDateInput.value = start;
+          endDateInput.value = end;
+          applyFilters();
+        });
+
+        // Clear button
+        clearDateBtn.addEventListener('click', () => {
+          startDateInput.value = '';
+          endDateInput.value = '';
+          applyFilters();
+        });
+
         // Initial render
         applyFilters();
 
-        // Search functionality
+        // Search and filter functionality
         searchInput.addEventListener('input', applyFilters);
         sourceFilter.addEventListener('change', applyFilters);
+        startDateInput.addEventListener('change', applyFilters);
+        endDateInput.addEventListener('change', applyFilters);
 
       } catch (error) {
         console.error('Error loading events:', error);
-        document.getElementById('eventsBody').innerHTML = '<tr><td colspan="7" style="padding: 2rem; text-align: center; color: var(--muted);">Error loading events data</td></tr>';
+        document.getElementById('eventsBody').innerHTML = '<tr><td colspan="8" style="padding: 2rem; text-align: center; color: var(--muted);">Error loading events data</td></tr>';
       }
     }
 
