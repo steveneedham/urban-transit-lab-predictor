@@ -317,6 +317,15 @@
             <option value="Claude">Claude</option>
           </select>
         </div>
+      <p class="library-intro">135 events from ChatGPT Forecast (90) and Claude Forecast (45) models (2024–2026). Search by name, category, or area to see impact tier and dates.</p>
+
+      <div style="margin-bottom: 1.5rem; display: grid; grid-template-columns: 1fr auto; gap: 1.5rem; align-items: center;">
+        <input type="text" id="eventSearch" placeholder="Search events..." style="width: 100%; padding: 0.75rem; border: 2px solid var(--amber); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: var(--text-body);">
+        <select id="sourceFilter" style="padding: 0.75rem; border: 2px solid var(--amber); border-radius: var(--radius-sm); background: var(--ink); color: var(--text); font-family: var(--font-body); font-size: var(--text-body); cursor: pointer;">
+          <option value="all">All Sources</option>
+          <option value="ChatGPT">ChatGPT Forecast</option>
+          <option value="Claude">Claude Forecast</option>
+        </select>
       </div>
 
       <div style="overflow-x: auto; border: 2px solid var(--amber); border-radius: var(--radius-sm);">
@@ -330,6 +339,7 @@
               <th style="padding: 0.8rem; text-align: center; font-weight: 600;">Impact</th>
               <th style="padding: 0.8rem; text-align: center; font-weight: 600;">Src</th>
               <th style="padding: 0.8rem; text-align: center; font-weight: 600;">ISO YR-WK</th>
+              <th style="padding: 0.8rem; text-align: center; font-weight: 600;">Source</th>
               <th style="padding: 0.8rem; text-align: left; font-weight: 600;">Dates</th>
             </tr>
           </thead>
@@ -481,6 +491,7 @@
             }
 
             return matchesSearch && matchesSource && matchesDateRange;
+            return matchesSearch && matchesSource;
           });
 
           renderEvents(filtered);
@@ -503,6 +514,12 @@
           endDateInput.value = end;
           applyFilters();
         });
+        // Initial render
+        applyFilters();
+
+        // Search functionality
+        searchInput.addEventListener('input', applyFilters);
+        sourceFilter.addEventListener('change', applyFilters);
 
         // Next Week button
         nextWeekBtn.addEventListener('click', () => {
@@ -531,6 +548,7 @@
       } catch (error) {
         console.error('Error loading events:', error);
         document.getElementById('eventsBody').innerHTML = '<tr><td colspan="8" style="padding: 2rem; text-align: center; color: var(--muted);">Error loading events data</td></tr>';
+        document.getElementById('eventsBody').innerHTML = '<tr><td colspan="7" style="padding: 2rem; text-align: center; color: var(--muted);">Error loading events data</td></tr>';
       }
     }
 
