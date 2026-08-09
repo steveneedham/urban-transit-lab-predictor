@@ -596,11 +596,6 @@
         `;
       }).join('');
 
-      if (!map) {
-        initMap();
-      }
-      updateMapWithDemand(forecast.hotspots);
-
       const legendHtml = forecast.hotspots.map(spot => `
         <div class="legend-item">
           <div class="legend-color" style="background-color: ${zones[spot.name].color}"></div>
@@ -690,11 +685,16 @@
         </div>
       `;
 
-      // Re-initialize map after DOM update
+      // Initialize map after DOM update with forecast data
       setTimeout(() => {
+        zonePolygons = {};
+        if (map) {
+          map.remove();
+          map = null;
+        }
         initMap();
         updateMapWithDemand(forecast.hotspots);
-      }, 100);
+      }, 50);
     }
 
     predictBtn.addEventListener('click', async () => {
