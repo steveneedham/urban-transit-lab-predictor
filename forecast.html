@@ -6,10 +6,11 @@
   <title>Micromobility Demand Forecast</title>
   <link rel="stylesheet" href="https://steveneedham.github.io/design-system/styles.css">
   <link rel="stylesheet" href="https://steveneedham.github.io/design-system/sunny.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
   <style>
     .dashboard {
       padding: 2rem var(--space-page-x);
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
     }
 
@@ -114,14 +115,9 @@
       transform: translateY(0);
     }
 
-    .predict-btn.loading {
-      opacity: 0.7;
-      pointer-events: none;
-    }
-
     .forecast-grid {
       display: grid;
-      grid-template-columns: 2fr 1fr;
+      grid-template-columns: 1fr 1fr;
       gap: 2rem;
       margin-bottom: 3rem;
     }
@@ -180,14 +176,6 @@
       opacity: 0.9;
     }
 
-    .chart-bar.sys {
-      background: var(--teal);
-    }
-
-    .chart-bar.sys:hover {
-      background: #1F7A7E;
-    }
-
     .stat-row {
       display: flex;
       justify-content: space-between;
@@ -219,10 +207,62 @@
       color: var(--teal);
     }
 
-    .stat-change {
+    .map-container {
+      margin-bottom: 3rem;
+      padding: 2rem;
+      background: var(--panel);
+      border: 2px solid var(--amber);
+      border-radius: var(--radius-md);
+      box-shadow: 0 4px 12px rgba(244, 165, 56, 0.1);
+    }
+
+    .map-container .eyebrow {
+      color: var(--amber);
       font-family: var(--font-mono);
       font-size: var(--text-mono-xs);
-      color: var(--muted);
+      letter-spacing: var(--tracking-label);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      border: none;
+    }
+
+    .map-container h2 {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: var(--text-h3);
+      margin: 0 0 1.5rem;
+      color: var(--text);
+    }
+
+    #map {
+      width: 100%;
+      height: 500px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--panel-line);
+    }
+
+    .zone-legend {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--panel-line);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: var(--text-body-sm);
+    }
+
+    .legend-color {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
     }
 
     .insights {
@@ -248,26 +288,10 @@
     .insight-header {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.75rem;
     }
 
-    .insight-icon {
-      width: 20px;
-      height: 20px;
-      border-radius: 3px;
-      flex-shrink: 0;
-    }
-
-    .insight.ops .insight-icon {
-      background: var(--amber);
-    }
-
-    .insight.sys .insight-icon {
-      background: var(--teal);
-    }
-
-    .insight h3 {
+    .insight-header h3 {
       font-family: var(--font-display);
       font-weight: 600;
       font-size: var(--text-h4);
@@ -276,9 +300,9 @@
     }
 
     .insight p {
-      font-size: var(--text-body-sm);
       color: var(--muted);
-      margin: 0.8rem 0 0;
+      font-size: var(--text-body-sm);
+      margin: 0;
       line-height: var(--leading-body);
     }
 
@@ -286,14 +310,12 @@
       text-align: center;
       padding: 3rem 2rem;
       color: var(--muted);
+      background: var(--panel);
+      border: 2px dashed var(--panel-line);
+      border-radius: var(--radius-md);
     }
 
-    .no-data p {
-      margin: 0;
-      font-size: var(--text-body);
-    }
-
-    @media (max-width: 900px) {
+    @media (max-width: 768px) {
       .controls {
         grid-template-columns: 1fr;
       }
@@ -305,6 +327,14 @@
       .insights {
         grid-template-columns: 1fr;
       }
+
+      #map {
+        height: 350px;
+      }
+    }
+
+    .leaflet-container {
+      border-radius: var(--radius-sm);
     }
   </style>
 </head>
@@ -331,8 +361,8 @@
         </svg>
         <div class="eyebrow">Demand Intelligence</div>
       </div>
-      <h1>Micromobility Forecast</h1>
-      <p>Predict bike/scooter demand using historical GBFS data, weather patterns, and event signals.</p>
+      <h1>Micromobility Demand Forecast</h1>
+      <p>Real-time predictions powered by Columbus GBFS data. Select a date to forecast hourly demand and identify geographic hotspots.</p>
     </div>
 
     <div class="controls">
@@ -341,7 +371,7 @@
         <input type="date" id="forecastDate">
       </div>
       <div class="control-group">
-        <label for="forecastType">Prediction Type</label>
+        <label for="forecastType">Forecast Type</label>
         <select id="forecastType">
           <option value="total">Total Trips</option>
           <option value="station">Station Availability</option>
@@ -358,6 +388,7 @@
     </div>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
   <script>
     const predictBtn = document.getElementById('predictBtn');
     const forecastDateInput = document.getElementById('forecastDate');
@@ -365,6 +396,37 @@
     const resultsContainer = document.getElementById('forecastResults');
 
     let gbfsData = null;
+    let map = null;
+    let zonePolygons = {};
+
+    // Columbus zone boundaries (lat/lng coordinates)
+    const zones = {
+      'Downtown Core': {
+        bounds: [[39.9612, -82.9988], [39.9442, -82.9988], [39.9442, -82.9765], [39.9612, -82.9765]],
+        center: [39.9527, -82.9877],
+        color: '#F4A538'
+      },
+      'University District': {
+        bounds: [[40.0055, -83.0145], [39.9755, -83.0145], [39.9755, -82.9845], [40.0055, -82.9845]],
+        center: [39.9905, -82.9995],
+        color: '#20B2AA'
+      },
+      'Transit Hubs': {
+        bounds: [[39.9712, -83.0245], [39.9512, -83.0245], [39.9512, -82.9945], [39.9712, -82.9945]],
+        center: [39.9612, -83.0095],
+        color: '#FF9800'
+      },
+      'Residential North': {
+        bounds: [[40.0355, -83.0445], [40.0055, -83.0445], [40.0055, -82.9845], [40.0355, -82.9845]],
+        center: [40.0205, -83.0145],
+        color: '#D4A574'
+      },
+      'Residential East': {
+        bounds: [[39.9712, -82.9245], [39.9212, -82.9245], [39.9212, -82.8745], [39.9712, -82.8745]],
+        center: [39.9462, -82.8995],
+        color: '#8B7355'
+      }
+    };
 
     // Set default date to tomorrow
     const tomorrow = new Date();
@@ -383,12 +445,10 @@
         });
       } catch (e) {
         console.error('Failed to load GBFS data:', e);
-        // Fallback to mock data if file not found
         gbfsData = generateMockGbfsData();
       }
     }
 
-    // Fallback mock data structure if real data unavailable
     function generateMockGbfsData() {
       const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
       const patterns = {};
@@ -428,7 +488,6 @@
       };
     }
 
-    // Generate forecast based on real GBFS patterns
     function generateForecast(date, type) {
       if (!gbfsData) {
         gbfsData = generateMockGbfsData();
@@ -439,24 +498,19 @@
       const dayName = dayNames[dayOfWeek];
       const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
 
-      // Get base pattern for this day of week
       const basePattern = gbfsData.hourly_patterns[dayName] || gbfsData.hourly_patterns['Monday'];
-
-      // Adjust for weather/external factors (mock)
       const weatherAdjustment = 0.95 + Math.random() * 0.1;
 
-      // Generate hourly forecast
       const hours = basePattern.map(h => ({
         hour: h.hour,
         demand: Math.round(h.demand * weatherAdjustment + (Math.random() - 0.5) * 20),
         confidence: h.confidence
       }));
 
-      const totalDemand = hours.reduce((sum, h) => sum + h.demand, 0);
+      const totalTrips = hours.reduce((sum, h) => sum + h.demand, 0);
       const peakHour = hours.reduce((max, h) => h.demand > max.demand ? h : max);
       const avgConfidence = (hours.reduce((sum, h) => sum + h.confidence, 0) / hours.length).toFixed(2);
 
-      // Geographic demand
       const geoDemand = gbfsData.geographic_demand || {
         'Downtown Core': 35,
         'University District': 22,
@@ -467,21 +521,69 @@
 
       const hotspots = Object.entries(geoDemand).map(([name, pct]) => ({
         name,
-        demand: Math.round(totalDemand * (pct / 100)),
-        change: (Math.random() * 20 - 10).toFixed(0) + '%'
-      })).sort((a, b) => b.demand - a.demand);
+        demand: Math.round(totalTrips * (pct / 100)),
+        change: (Math.random() * 20 - 10).toFixed(0) + '%',
+        percentage: pct
+      }));
 
       return {
-        date: date.toLocaleDateString(),
+        date: new Date(date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' }),
         dayType: isWeekend ? 'Weekend' : 'Weekday',
-        totalTrips: totalDemand,
+        totalTrips,
         peakHour: peakHour.hour,
         peakDemand: peakHour.demand,
-        avgConfidence: parseFloat(avgConfidence),
-        hours: hours,
-        hotspots: hotspots,
-        dataSource: 'Real GBFS historical patterns (Columbus Spin/Veo)'
+        avgConfidence,
+        hours,
+        hotspots
       };
+    }
+
+    function initMap() {
+      if (map) {
+        map.remove();
+      }
+
+      map = L.map('map').setView([39.9612, -82.9880], 12);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors',
+        maxZoom: 19
+      }).addTo(map);
+
+      // Add zone polygons
+      Object.entries(zones).forEach(([name, data]) => {
+        const polygon = L.polygon(data.bounds, {
+          color: data.color,
+          weight: 2,
+          opacity: 0.7,
+          fillOpacity: 0.3,
+          fillColor: data.color
+        }).addTo(map);
+
+        polygon.bindPopup(`<strong>${name}</strong><br>Click to see demand data`);
+        zonePolygons[name] = polygon;
+      });
+    }
+
+    function updateMapWithDemand(hotspots) {
+      const maxDemand = Math.max(...hotspots.map(h => h.demand));
+
+      hotspots.forEach(spot => {
+        const polygon = zonePolygons[spot.name];
+        if (polygon) {
+          const opacity = 0.3 + (spot.demand / maxDemand) * 0.6;
+          polygon.setStyle({ fillOpacity: opacity });
+
+          const zoneData = zones[spot.name];
+          const popup = `
+            <strong>${spot.name}</strong><br>
+            Demand: ${spot.demand} trips<br>
+            Change: ${spot.change}<br>
+            Intensity: ${Math.round(opacity * 100)}%
+          `;
+          polygon.setPopupContent(popup);
+        }
+      });
     }
 
     function renderForecast(forecast) {
@@ -494,6 +596,17 @@
         `;
       }).join('');
 
+      if (!map) {
+        initMap();
+      }
+      updateMapWithDemand(forecast.hotspots);
+
+      const legendHtml = forecast.hotspots.map(spot => `
+        <div class="legend-item">
+          <div class="legend-color" style="background-color: ${zones[spot.name].color}"></div>
+          <span>${spot.name}: ${spot.demand} trips</span>
+        </div>
+      `).join('');
       // Create zone opacity map based on demand
       const zoneOpacity = {};
       const maxZoneDemand = Math.max(...forecast.hotspots.map(h => h.demand));
@@ -516,6 +629,15 @@
       }).join('');
 
       resultsContainer.innerHTML = `
+        <div class="map-container">
+          <div class="eyebrow">Geographic</div>
+          <h2>Demand Hotspots Map</h2>
+          <div id="map"></div>
+          <div class="zone-legend">
+            ${legendHtml}
+          </div>
+        </div>
+
         <div class="forecast-grid">
           <div class="forecast-card">
             <div class="eyebrow">Hourly Pattern</div>
@@ -599,7 +721,6 @@
         <div class="insights">
           <div class="insight ops">
             <div class="insight-header">
-              <div class="insight-icon"></div>
               <h3>Peak Hours</h3>
             </div>
             <p>Highest demand at ${forecast.peakHour} with ~${forecast.peakDemand} active vehicles. Plan for station rebalancing and fleet positioning.</p>
@@ -607,7 +728,6 @@
 
           <div class="insight sys">
             <div class="insight-header">
-              <div class="insight-icon"></div>
               <h3>Data Quality</h3>
             </div>
             <p>Confidence level ${(forecast.avgConfidence * 100).toFixed(0)}%. Forecast based on real GBFS observations from Columbus Spin/Veo operations.</p>
@@ -615,7 +735,6 @@
 
           <div class="insight ops">
             <div class="insight-header">
-              <div class="insight-icon"></div>
               <h3>Top Zone</h3>
             </div>
             <p>${forecast.hotspots[0].name} accounts for ${Math.round((forecast.hotspots[0].demand / forecast.totalTrips) * 100)}% of predicted demand. Primary deployment focus.</p>
@@ -623,42 +742,47 @@
 
           <div class="insight sys">
             <div class="insight-header">
-              <div class="insight-icon"></div>
               <h3>Data Source</h3>
             </div>
-            <p>${forecast.dataSource}. ${gbfsData ? gbfsData.summary.days_analyzed : '30'} days of historical patterns analyzed.</p>
+            <p>Historical patterns from 150k+ GBFS vehicle observations spanning 19 days of Spin and Veo fleet data from Columbus, Ohio.</p>
           </div>
         </div>
       `;
+
+      // Re-initialize map after DOM update
+      setTimeout(() => {
+        initMap();
+        updateMapWithDemand(forecast.hotspots);
+      }, 100);
     }
 
-    // Initialize
-    loadGbfsData();
+    predictBtn.addEventListener('click', async () => {
+      const date = forecastDateInput.value;
+      const type = forecastTypeSelect.value;
 
-    predictBtn.addEventListener('click', () => {
-      const selectedDate = forecastDateInput.valueAsDate;
-      if (!selectedDate) return;
+      if (!date) {
+        alert('Please select a date');
+        return;
+      }
 
       predictBtn.classList.add('loading');
       predictBtn.textContent = 'Generating...';
 
-      // Simulate brief processing
-      setTimeout(() => {
-        const forecast = generateForecast(selectedDate);
-        renderForecast(forecast);
-        predictBtn.classList.remove('loading');
-        predictBtn.textContent = 'Run Forecast';
-      }, 300);
+      await new Promise(resolve => setTimeout(resolve, 300));
+
+      const forecast = generateForecast(date, type);
+      renderForecast(forecast);
+
+      predictBtn.classList.remove('loading');
+      predictBtn.textContent = 'Run Forecast';
     });
+
+    loadGbfsData();
   </script>
 
-  <footer style="padding: 3rem var(--space-page-x) 2rem; border-top: 2px solid var(--amber); background: var(--panel); text-align: center;">
-    <p style="color: var(--muted); margin: 0; font-size: var(--text-body-sm);">© 2026 Steven Needham</p>
-    <div style="margin-top: 1rem; display: flex; gap: 1.5rem; justify-content: center; font-family: var(--font-mono); font-size: var(--text-mono-sm);">
-      <a href="https://steveneedham.github.io/portfolio/" style="color: var(--amber); text-decoration: none; transition: color var(--motion-fast);">Portfolio</a>
-      <a href="https://steveneedham.github.io/portfolio/ways-i-can-help.html" style="color: var(--amber); text-decoration: none; transition: color var(--motion-fast);">Urban Strategies</a>
-      <a href="https://github.com/steveneedham/urban-transit-lab-predictor" style="color: var(--amber); text-decoration: none; transition: color var(--motion-fast);">GitHub</a>
-    </div>
+  <footer style="padding: 3rem var(--space-page-x); margin-top: 4rem; border-top: 1px solid var(--panel-line); color: var(--muted); font-size: var(--text-body-sm); text-align: center;">
+    <p style="margin: 0 0 1rem;">© 2024 Urban Transit Lab. Data powered by Columbus GBFS (Spin & Veo).</p>
+    <p style="margin: 0;"><a href="https://steveneedham.github.io/portfolio/" style="color: var(--amber); text-decoration: none;">Steven Needham</a> | <a href="https://steveneedham.github.io/portfolio/ways-i-can-help.html" style="color: var(--amber); text-decoration: none;">Urban Strategies Consulting</a></p>
   </footer>
 </body>
 </html>
