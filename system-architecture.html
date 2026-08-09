@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Urban Transit Lab — System Architecture</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #FAF9F6;
+      padding: 40px 20px;
+      color: #14171C;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .header h1 {
+      font-family: 'Fraunces', serif;
+      font-size: 32px;
+      margin-bottom: 8px;
+      color: #14171C;
+    }
+    .header p {
+      font-size: 14px;
+      color: #666;
+    }
+    svg {
+      width: 100%;
+      height: auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      margin-bottom: 40px;
+    }
+    .legend {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+    }
+    .legend-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 13px;
+    }
+    .legend-swatch {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .legend-text strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+    .ops { background: #E8A33D; }
+    .systems { background: #4FD1C5; }
+    .future { background: #DDD; }
+    .note {
+      background: #fff3cd;
+      border-left: 4px solid #E8A33D;
+      padding: 16px;
+      margin-top: 20px;
+      border-radius: 4px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #333;
+    }
+    .note strong {
+      display: block;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>Urban Transit Lab System Architecture</h1>
+    <p>Current implementation: Research forecasting platform built on GBFS data</p>
+  </div>
+
+  <svg viewBox="0 0 1000 750" xmlns="http://www.w3.org/2000/svg">
+    <!-- Defs -->
+    <defs>
+      <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+        <polygon points="0 0, 10 3, 0 6" fill="#E8A33D" />
+      </marker>
+      <marker id="arrowhead-teal" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+        <polygon points="0 0, 10 3, 0 6" fill="#4FD1C5" />
+      </marker>
+      <marker id="arrowhead-future" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+        <polygon points="0 0, 10 3, 0 6" fill="#999" />
+      </marker>
+    </defs>
+
+    <!-- LAYER 1: DATA SOURCES (Top) -->
+    <text x="500" y="30" font-family="Fraunces, serif" font-size="16" font-weight="600" text-anchor="middle" fill="#14171C">DATA SOURCES</text>
+
+    <!-- GBFS Data (PRIMARY) -->
+    <rect x="50" y="60" width="200" height="90" rx="6" fill="#E8A33D" opacity="0.2" stroke="#E8A33D" stroke-width="3"/>
+    <text x="150" y="90" font-size="14" font-weight="700" text-anchor="middle" fill="#14171C">GBFS Fleet Data</text>
+    <text x="150" y="110" font-size="11" text-anchor="middle" fill="#666">Veo & Spin scooters</text>
+    <text x="150" y="128" font-size="11" text-anchor="middle" fill="#666">Live + historical snapshots</text>
+    <text x="150" y="146" font-size="10" text-anchor="middle" fill="#E8A33D" font-weight="600">✓ ACTIVE</text>
+
+    <!-- Event/Weather Data -->
+    <rect x="350" y="60" width="200" height="90" rx="6" fill="#4FD1C5" opacity="0.2" stroke="#4FD1C5" stroke-width="2"/>
+    <text x="450" y="90" font-size="14" font-weight="700" text-anchor="middle" fill="#14171C">Event & Weather</text>
+    <text x="450" y="110" font-size="11" text-anchor="middle" fill="#666">Seasonal patterns</text>
+    <text x="450" y="128" font-size="11" text-anchor="middle" fill="#666">Event correlation data</text>
+    <text x="450" y="146" font-size="10" text-anchor="middle" fill="#4FD1C5" font-weight="600">✓ ACTIVE</text>
+
+    <!-- 311/Community (FUTURE) -->
+    <rect x="650" y="60" width="200" height="90" rx="6" fill="#DDD" opacity="0.3" stroke="#999" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="750" y="90" font-size="14" font-weight="700" text-anchor="middle" fill="#666">311 Complaints</text>
+    <text x="750" y="110" font-size="11" text-anchor="middle" fill="#999">City feedback loops</text>
+    <text x="750" y="128" font-size="11" text-anchor="middle" fill="#999">Complaint mapping</text>
+    <text x="750" y="146" font-size="10" text-anchor="middle" fill="#999" font-weight="600">PLANNED</text>
+
+    <!-- LAYER 2: PROCESSING (Middle) -->
+    <text x="500" y="230" font-family="Fraunces, serif" font-size="16" font-weight="600" text-anchor="middle" fill="#14171C">DATA PROCESSING & ANALYSIS</text>
+
+    <!-- Arrows down -->
+    <line x1="150" y1="150" x2="150" y2="210" stroke="#E8A33D" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <line x1="450" y1="150" x2="450" y2="210" stroke="#4FD1C5" stroke-width="2" marker-end="url(#arrowhead-teal)"/>
+    <line x1="750" y1="150" x2="750" y2="210" stroke="#999" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrowhead-future)"/>
+
+    <!-- GBFS Analysis Pipeline -->
+    <rect x="50" y="210" width="200" height="90" rx="6" fill="#E8A33D" opacity="0.2" stroke="#E8A33D" stroke-width="2"/>
+    <text x="150" y="235" font-size="12" font-weight="700" text-anchor="middle" fill="#14171C">GBFS Pipeline</text>
+    <text x="150" y="255" font-size="10" text-anchor="middle" fill="#666">analyze_gbfs_data.py</text>
+    <text x="150" y="272" font-size="10" text-anchor="middle" fill="#666">Hourly patterns</text>
+    <text x="150" y="289" font-size="10" text-anchor="middle" fill="#666">Geographic zones</text>
+
+    <!-- Events/Weather Analysis -->
+    <rect x="350" y="210" width="200" height="90" rx="6" fill="#4FD1C5" opacity="0.2" stroke="#4FD1C5" stroke-width="2"/>
+    <text x="450" y="235" font-size="12" font-weight="700" text-anchor="middle" fill="#14171C">Correlation Analysis</text>
+    <text x="450" y="255" font-size="10" text-anchor="middle" fill="#666">Weather patterns</text>
+    <text x="450" y="272" font-size="10" text-anchor="middle" fill="#666">Event demand signals</text>
+    <text x="450" y="289" font-size="10" text-anchor="middle" fill="#666">Seasonal forecasts</text>
+
+    <!-- Future: 311 Analysis -->
+    <rect x="650" y="210" width="200" height="90" rx="6" fill="#DDD" opacity="0.2" stroke="#999" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="750" y="235" font-size="12" font-weight="700" text-anchor="middle" fill="#666">311 Intelligence</text>
+    <text x="750" y="255" font-size="10" text-anchor="middle" fill="#999">(Planned)</text>
+    <text x="750" y="272" font-size="10" text-anchor="middle" fill="#999">Complaint patterns</text>
+    <text x="750" y="289" font-size="10" text-anchor="middle" fill="#999">Regulatory impact</text>
+
+    <!-- LAYER 3: RESEARCH DASHBOARDS (Bottom) -->
+    <text x="500" y="380" font-family="Fraunces, serif" font-size="16" font-weight="600" text-anchor="middle" fill="#14171C">RESEARCH & ANALYSIS OUTPUTS</text>
+
+    <!-- Arrows converging -->
+    <line x1="150" y1="300" x2="120" y2="360" stroke="#E8A33D" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <line x1="450" y1="300" x2="380" y2="360" stroke="#4FD1C5" stroke-width="2" marker-end="url(#arrowhead-teal)"/>
+    <line x1="450" y1="300" x2="480" y2="360" stroke="#4FD1C5" stroke-width="2" marker-end="url(#arrowhead-teal)"/>
+    <line x1="450" y1="300" x2="580" y2="360" stroke="#4FD1C5" stroke-width="2" marker-end="url(#arrowhead-teal)"/>
+    <line x1="150" y1="300" x2="250" y2="360" stroke="#E8A33D" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+    <!-- Forecast Dashboard -->
+    <rect x="30" y="360" width="170" height="100" rx="6" fill="#E8A33D" opacity="0.15" stroke="#E8A33D" stroke-width="2"/>
+    <text x="115" y="385" font-size="12" font-weight="600" text-anchor="middle" fill="#14171C">Demand Forecast</text>
+    <text x="115" y="405" font-size="10" text-anchor="middle" fill="#666">Dashboard</text>
+    <text x="115" y="420" font-size="9" text-anchor="middle" fill="#999">forecast.html</text>
+    <text x="115" y="435" font-size="9" text-anchor="middle" fill="#999">24-hr patterns</text>
+    <text x="115" y="450" font-size="9" text-anchor="middle" fill="#999">hotspot maps</text>
+
+    <!-- Accuracy Report -->
+    <rect x="215" y="360" width="170" height="100" rx="6" fill="#E8A33D" opacity="0.15" stroke="#E8A33D" stroke-width="2"/>
+    <text x="300" y="385" font-size="12" font-weight="600" text-anchor="middle" fill="#14171C">Forecast Accuracy</text>
+    <text x="300" y="405" font-size="10" text-anchor="middle" fill="#666">Report</text>
+    <text x="300" y="420" font-size="9" text-anchor="middle" fill="#999">comparison.html</text>
+    <text x="300" y="435" font-size="9" text-anchor="middle" fill="#999">Performance metrics</text>
+    <text x="300" y="450" font-size="9" text-anchor="middle" fill="#999">Model validation</text>
+
+    <!-- Weather Analysis -->
+    <rect x="400" y="360" width="170" height="100" rx="6" fill="#4FD1C5" opacity="0.15" stroke="#4FD1C5" stroke-width="2"/>
+    <text x="485" y="385" font-size="12" font-weight="600" text-anchor="middle" fill="#14171C">Weather Analysis</text>
+    <text x="485" y="405" font-size="10" text-anchor="middle" fill="#666">Dashboard</text>
+    <text x="485" y="420" font-size="9" text-anchor="middle" fill="#999">weather.html</text>
+    <text x="485" y="435" font-size="9" text-anchor="middle" fill="#999">Correlation patterns</text>
+    <text x="485" y="450" font-size="9" text-anchor="middle" fill="#999">Seasonal impact</text>
+
+    <!-- Case Study -->
+    <rect x="585" y="360" width="170" height="100" rx="6" fill="#4FD1C5" opacity="0.15" stroke="#4FD1C5" stroke-width="2"/>
+    <text x="670" y="385" font-size="12" font-weight="600" text-anchor="middle" fill="#14171C">Event Readiness</text>
+    <text x="670" y="405" font-size="10" text-anchor="middle" fill="#666">Case Study</text>
+    <text x="670" y="420" font-size="9" text-anchor="middle" fill="#999">case-study.html</text>
+    <text x="670" y="435" font-size="9" text-anchor="middle" fill="#999">Festival analysis</text>
+    <text x="670" y="450" font-size="9" text-anchor="middle" fill="#999">Event playbook</text>
+
+    <!-- Research Library -->
+    <rect x="770" y="360" width="170" height="100" rx="6" fill="#4FD1C5" opacity="0.15" stroke="#4FD1C5" stroke-width="2"/>
+    <text x="855" y="385" font-size="12" font-weight="600" text-anchor="middle" fill="#14171C">Research Library</text>
+    <text x="855" y="405" font-size="10" text-anchor="middle" fill="#666">Documentation</text>
+    <text x="855" y="420" font-size="9" text-anchor="middle" fill="#999">research-library.html</text>
+    <text x="855" y="435" font-size="9" text-anchor="middle" fill="#999">Methodology</text>
+    <text x="855" y="450" font-size="9" text-anchor="middle" fill="#999">Source guides</text>
+
+    <!-- LAYER 4: FUTURE OPERATIONAL (Bottom) -->
+    <text x="500" y="560" font-family="Fraunces, serif" font-size="16" font-weight="600" text-anchor="middle" fill="#999">PLANNED: OPERATIONAL INTELLIGENCE (v2+)</text>
+
+    <!-- Future arrows down (dashed) -->
+    <line x1="300" y1="460" x2="250" y2="520" stroke="#999" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrowhead-future)"/>
+    <line x1="670" y1="460" x2="570" y2="520" stroke="#999" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrowhead-future)"/>
+    <line x1="855" y1="460" x2="750" y2="520" stroke="#999" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrowhead-future)"/>
+
+    <!-- Future Outputs -->
+    <rect x="120" y="520" width="160" height="85" rx="6" fill="#DDD" opacity="0.2" stroke="#999" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="200" y="545" font-size="11" font-weight="600" text-anchor="middle" fill="#666">City Insight</text>
+    <text x="200" y="563" font-size="9" text-anchor="middle" fill="#999">Regulation analysis</text>
+    <text x="200" y="577" font-size="9" text-anchor="middle" fill="#999">Enforcement data</text>
+    <text x="200" y="591" font-size="9" text-anchor="middle" fill="#999">(Requires: 311 API)</text>
+
+    <rect x="400" y="520" width="160" height="85" rx="6" fill="#DDD" opacity="0.2" stroke="#999" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="480" y="545" font-size="11" font-weight="600" text-anchor="middle" fill="#666">Operator Dashboard</text>
+    <text x="480" y="563" font-size="9" text-anchor="middle" fill="#999">Rebalancing targets</text>
+    <text x="480" y="577" font-size="9" text-anchor="middle" fill="#999">Performance gaps</text>
+    <text x="480" y="591" font-size="9" text-anchor="middle" fill="#999">(Requires: Ops API)</text>
+
+    <rect x="680" y="520" width="160" height="85" rx="6" fill="#DDD" opacity="0.2" stroke="#999" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="760" y="545" font-size="11" font-weight="600" text-anchor="middle" fill="#666">Community Loop</text>
+    <text x="760" y="563" font-size="9" text-anchor="middle" fill="#999">Feedback status</text>
+    <text x="760" y="577" font-size="9" text-anchor="middle" fill="#999">Response tracking</text>
+    <text x="760" y="591" font-size="9" text-anchor="middle" fill="#999">(Requires: Feedback)</text>
+  </svg>
+
+  <div class="legend">
+    <div class="legend-item">
+      <div class="legend-swatch ops"></div>
+      <div class="legend-text">
+        <strong>Operational (GBFS)</strong>
+        Fleet telemetry analysis and demand forecasting
+      </div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-swatch systems"></div>
+      <div class="legend-text">
+        <strong>Research & Systems</strong>
+        Correlation analysis, event readiness, methodology
+      </div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-swatch future"></div>
+      <div class="legend-text">
+        <strong>Planned (v2+)</strong>
+        City integration, operator APIs, community feedback loops
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>About this diagram:</strong>
+    This reflects the current <strong>research forecasting platform</strong> (active components) alongside planned operational integrations (dashed). The system successfully processes GBFS data and generates research dashboards and case studies. Future phases will require integrations with city 311 systems, operator APIs, and community feedback mechanisms to become a full operational intelligence hub.
+  </div>
+</div>
+
+</body>
+</html>
